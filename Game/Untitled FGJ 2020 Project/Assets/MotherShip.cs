@@ -4,6 +4,12 @@ using UnityEngine;
 
 public class MotherShip : MonoBehaviour
 {
+    [SerializeField]
+    float healthPerModule = 10f;
+
+
+    float health;
+
     List<ShipPart> shipParts = new List<ShipPart>(),
         availableParts = new List<ShipPart>();
 
@@ -13,19 +19,23 @@ public class MotherShip : MonoBehaviour
     {
         shipParts.AddRange(GetComponentsInChildren<ShipPart>());
         availableParts.AddRange(shipParts);
+        health = healthPerModule;
     }
 
     // Update is called once per frame
     void Update()
     {
-        LaunchRandomPart();
-
         if (Input.GetKeyDown(KeyCode.R))
         {
             foreach (var part in shipParts)
             {
                 part.Repair();
             }
+        }
+
+        if (Input.GetKeyDown(KeyCode.T))
+        {
+            Hurt(5);
         }
     }
 
@@ -55,5 +65,15 @@ public class MotherShip : MonoBehaviour
     public void AttachPart(ShipPart part)
     {
         availableParts.Add(part);
+    }
+
+    public void Hurt(float damage)
+    {
+        health -= damage;
+        if (health <= 0)
+        {
+            LaunchRandomPart();
+            health = healthPerModule;
+        }
     }
 }
