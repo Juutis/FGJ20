@@ -58,7 +58,7 @@ public class WarpDrive : MonoBehaviour
         foreach (var part in motherShip.shipParts)
         {
             part.HideGhost();
-            if (part.IsDockable)
+            if (!motherShip.availableParts.Contains(part))
             {
                 part.gameObject.SetActive(false);
             }

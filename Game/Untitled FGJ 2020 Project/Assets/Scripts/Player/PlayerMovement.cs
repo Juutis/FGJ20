@@ -63,7 +63,7 @@ public class PlayerMovement : MonoBehaviour {
         verticalAxis = Input.GetAxis("Vertical");
         if (active)
         {
-            rb2d.drag = config.AngularDrag;
+            rb2d.drag = config.LinearDrag;
             rb2d.angularDrag = config.AngularDrag;
             rb2d.mass = config.Mass;
             HandleHorizontalAxis(horizontalAxis);
