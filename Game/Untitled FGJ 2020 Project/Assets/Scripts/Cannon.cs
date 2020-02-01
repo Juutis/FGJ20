@@ -90,7 +90,7 @@ public class Cannon : MonoBehaviour
             float rotateAmount = Mathf.Min(Mathf.Abs(angleDiff), Time.deltaTime * 90);
             barrel.transform.Rotate(Vector3.forward, rotateAmount * rotateDir);
 
-            if(rotateAmount < 0.01f)
+            if(rotateAmount < 0.1f)
             {
                 state = CannonStates.Shooting;
             }
