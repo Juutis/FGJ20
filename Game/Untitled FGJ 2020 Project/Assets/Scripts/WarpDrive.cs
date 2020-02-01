@@ -7,6 +7,7 @@ public class WarpDrive : MonoBehaviour
     WarpEffect effect;
     MotherShip motherShip;
     UI ui;
+    PlayerMovement player;
 
     [SerializeField]
     public int fuel = 1;
@@ -18,6 +19,7 @@ public class WarpDrive : MonoBehaviour
         effect = GetComponent<WarpEffect>();
         motherShip = GameObject.FindGameObjectWithTag("MotherShip").GetComponent<MotherShip>();
         ui = GameObject.FindGameObjectWithTag("UI").GetComponent<UI>();
+        player = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerMovement>();
     }
 
     // Update is called once per frame
@@ -31,6 +33,8 @@ public class WarpDrive : MonoBehaviour
                 ui.HideWarpText();
                 effect.Warp();
                 fuel--;
+                player.transform.position = motherShip.transform.position;
+                player.Disable();
             }
         }
         else

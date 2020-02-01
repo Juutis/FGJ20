@@ -17,6 +17,8 @@ public class PlayerMovement : MonoBehaviour {
 
     private PlayerMovementConfig config;
 
+    private bool active;
+
     private enum ShipDirection
     {
         Forward,
@@ -50,11 +52,23 @@ public class PlayerMovement : MonoBehaviour {
         return null;
     }
 
-    private void Update() {
-        float horizontalAxis = Input.GetAxis("Horizontal");
-        float verticalAxis = Input.GetAxis("Vertical");
-        HandleHorizontalAxis(horizontalAxis);
-        HandleVerticalAxis(verticalAxis);
+    private void Update()
+    {
+        if (active)
+        {
+            float horizontalAxis = Input.GetAxis("Horizontal");
+            float verticalAxis = Input.GetAxis("Vertical");
+            HandleHorizontalAxis(horizontalAxis);
+            HandleVerticalAxis(verticalAxis);
+        }
+    }
+
+    private void FixedUpdate()
+    {
+        if (!active)
+        {
+            rb2d.velocity = Vector2.zero;
+        }
     }
 
     private void HandleHorizontalAxis(float horizontalAxis) {
@@ -121,6 +135,16 @@ public class PlayerMovement : MonoBehaviour {
 
     private void ActivateRightNavigationThruster(bool active) {
         rightNavigationThruster.SetActive(active);
+    }
+
+    public void Activate()
+    {
+        active = true;
+    }
+
+    public void Disable()
+    {
+        active = false;
     }
 
 }
