@@ -13,7 +13,7 @@ public class MotherShip : MonoBehaviour
 
     float health;
 
-    List<ShipPart> shipParts = new List<ShipPart>(),
+    public List<ShipPart> shipParts = new List<ShipPart>(),
         availableParts = new List<ShipPart>();
 
 

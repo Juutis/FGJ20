@@ -256,6 +256,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   healthPerModule: 10
   lifeSupportTime: 60
+  shipParts: []
+  availableParts: []
 --- !u!1 &2487702430651969699
 GameObject:
   m_ObjectHideFlags: 0
@@ -317,7 +319,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2487702431774094148}
   m_LocalRotation: {x: -0, y: -0, z: 0.7071068, w: 0.7071068}
-  m_LocalPosition: {x: -3.5099998, y: 0.029999971, z: 1}
+  m_LocalPosition: {x: -4.053, y: 0.101, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 2487702430159017319}
@@ -5071,7 +5073,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2487702431936618767}
   m_LocalRotation: {x: -0, y: -0, z: 0.7071068, w: 0.7071068}
-  m_LocalPosition: {x: -2.7999997, y: -1.2, z: 1}
+  m_LocalPosition: {x: -3.36, y: -1.154, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 2487702430159017319}

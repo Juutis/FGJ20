@@ -12,6 +12,8 @@ public class WarpDrive : MonoBehaviour
     [SerializeField]
     public int fuel = 1;
 
+    GameObject levelRoot;
+
 
     // Start is called before the first frame update
     void Start()
@@ -20,6 +22,7 @@ public class WarpDrive : MonoBehaviour
         motherShip = GameObject.FindGameObjectWithTag("MotherShip").GetComponent<MotherShip>();
         ui = GameObject.FindGameObjectWithTag("UI").GetComponent<UI>();
         player = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerMovement>();
+        levelRoot = GameObject.FindGameObjectWithTag("Level");
     }
 
     // Update is called once per frame
@@ -30,11 +33,7 @@ public class WarpDrive : MonoBehaviour
             ui.ShowWarpText();
             if (Input.GetKeyDown(KeyCode.Return))
             {
-                ui.HideWarpText();
-                effect.Warp();
-                fuel--;
-                player.transform.position = motherShip.transform.position;
-                player.Disable();
+                warp();
             }
         }
         else
@@ -46,5 +45,24 @@ public class WarpDrive : MonoBehaviour
     bool readyToWarp()
     {
         return motherShip.IsReadyToWarp() && fuel > 0;
+    }
+
+    void warp()
+    {
+
+        ui.HideWarpText();
+        effect.Warp();
+        fuel--;
+        player.transform.position = motherShip.transform.position;
+        player.Disable();
+        foreach (var part in motherShip.shipParts)
+        {
+            part.HideGhost();
+            if (part.IsDockable)
+            {
+                part.gameObject.SetActive(false);
+            }
+        }
+        levelRoot.SetActive(false);
     }
 }
