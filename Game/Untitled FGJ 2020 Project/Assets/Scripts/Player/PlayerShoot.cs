@@ -32,7 +32,7 @@ public class PlayerShoot : MonoBehaviour
     }
 
     private Transform FindChildObject (string name) {
-        foreach(Transform child in transform) {
+        foreach(Transform child in GetComponentsInChildren<Transform>()) {
             if (child.name == name) {
                 return child.gameObject.transform;
             }

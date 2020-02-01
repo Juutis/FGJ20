@@ -22,7 +22,7 @@ public class DestroyableCannon : MonoBehaviour
         if(currentHP <= 0)
         {
             Destroy(gameObject);
-            destroyedParts.transform.parent = null;
+            destroyedParts.transform.parent = transform.parent;
             destroyedParts.SetActive(true);
             Vector3 center = transform.position;
             foreach(Transform child in destroyedParts.transform)

@@ -11,6 +11,7 @@ TagManager:
   - ZoomOutTrigger
   - UI
   - WarpDrive
+  - Level
   layers:
   - Default
   - TransparentFX
