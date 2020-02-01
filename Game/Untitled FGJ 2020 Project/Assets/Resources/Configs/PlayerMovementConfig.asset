@@ -12,8 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4324559acb588d94dbeb490e7b83d480, type: 3}
   m_Name: PlayerMovementConfig
   m_EditorClassIdentifier: 
-  rotationSpeed: 9.34
-  velocityMagnitudeMax: 6
-  forwardSpeed: 2.06
-  backwardSpeed: 1.01
-  inertia: 0.3
+  mass: 1
+  angularDrag: 6
+  linearDrag: 50
+  rotationSpeed: 0.25
+  rotationForceMode2D: 0
+  velocityMagnitudeMax: 11
+  forwardSpeed: 9.1
+  speedForceMode2D: 0
+  backwardSpeed: 5

@@ -29,7 +29,7 @@ public class PlayerMovement : MonoBehaviour {
             Debug.LogWarning("Couldn't find Configs/PlayerMovementConfig!");
         }
         rb2d = GetComponent<Rigidbody2D>();
-        rb2d.inertia = config.Inertia;
+
         FindThrusters();
     }
 
@@ -51,10 +51,14 @@ public class PlayerMovement : MonoBehaviour {
     }
 
     private void Update() {
+        rb2d.drag = config.AngularDrag;
+        rb2d.angularDrag = config.AngularDrag;
+        rb2d.mass = config.Mass;
         float horizontalAxis = Input.GetAxis("Horizontal");
         float verticalAxis = Input.GetAxis("Vertical");
         HandleHorizontalAxis(horizontalAxis);
         HandleVerticalAxis(verticalAxis);
+        
     }
 
     private void HandleHorizontalAxis(float horizontalAxis) {
@@ -71,7 +75,7 @@ public class PlayerMovement : MonoBehaviour {
     }
 
     private void TurnShip(float horizontalAxis) {
-        rb2d.AddTorque(-horizontalAxis * config.RotationSpeed, ForceMode2D.Force);
+        rb2d.AddTorque(-horizontalAxis * config.RotationSpeed, config.RotationForceMode2D);
     }
 
     private void HandleVerticalAxis(float verticalAxis) {
@@ -97,7 +101,7 @@ public class PlayerMovement : MonoBehaviour {
                 vDirection = -vDirection;
                 speed = config.BackwardSpeed;
             }
-            rb2d.AddRelativeForce(vDirection * speed, ForceMode2D.Force);
+            rb2d.AddRelativeForce(vDirection * speed, config.SpeedForceMode2D);
         }
     }
 
