@@ -135,6 +135,8 @@ public class WarpEffect : MonoBehaviour
             effect.Play();
         }
 
+        DualMusicPlayer.main.EnterWarp();
+
         warpTimer = Time.time + warpDurationStart;
         warpEffectPlaying = true;
         warp = true;
@@ -147,7 +149,7 @@ public class WarpEffect : MonoBehaviour
         {
             effect.Stop();
         }
-
+        DualMusicPlayer.main.ExitWarp();
         warpTimer = Time.time + warpDurationEnd;
         warpEffectPlaying = true;
         warp = false;
