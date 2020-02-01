@@ -17,7 +17,7 @@ public class Cannon : MonoBehaviour
     private float chargeStarted = 0f;
     [SerializeField]
     private GameObject laser;
-    private float laserScaleMultiplier = 10f;
+    private float laserScaleMultiplier = 15f;
     private float laserShootSpeed = 375f;
     private float laserHitTime = 1f;
     private float laserHitStarted = -1f;
