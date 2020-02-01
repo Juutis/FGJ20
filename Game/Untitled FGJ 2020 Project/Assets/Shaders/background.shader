@@ -6,7 +6,8 @@
 		_MainColor("Main color", Color) = (0, 0, 0, 1)
 		_SecondaryColor("Secondary color", Color) = (1, 1, 1, 1)
 		_Scale("Scale", Float) = 1.0
-		_ScrollSpeed("ScrollSpeed", Float) = 1.0
+		_ScrollSpeedX("ScrollSpeedX", Float) = 1.0
+		_ScrollSpeedY("ScrollSpeedY", Float) = 1.0
 	}
 		SubShader
 		{
@@ -41,7 +42,8 @@
 				float4 _MainColor;
 				float4 _SecondaryColor;
 				float _Scale;
-				float _ScrollSpeed;
+				float _ScrollSpeedX;
+				float _ScrollSpeedY;
 
 				v2f vert(appdata v)
 				{
@@ -55,7 +57,9 @@
 				fixed4 frag(v2f i) : SV_Target
 				{
 					// sample the texture
-					fixed4 col = tex2D(_MainTex, i.uv*_Scale - _Time.y*_ScrollSpeed);
+					float2 uv = float2(i.uv.x*_Scale + _Time.y*_ScrollSpeedX, i.uv.y*_Scale + _Time.y*_ScrollSpeedY);
+					//fixed4 col = tex2D(_MainTex, i.uv*_Scale + _Time.y*_ScrollSpeedX);
+					fixed4 col = tex2D(_MainTex, uv);
 					if (col.a < 0.1) discard;
 					fixed4 retcol;
 					if (col.r > 0.5) {
