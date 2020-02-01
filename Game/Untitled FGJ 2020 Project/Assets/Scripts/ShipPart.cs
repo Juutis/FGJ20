@@ -53,7 +53,7 @@ public class ShipPart : MonoBehaviour
     public void Launch(Vector2 force)
     {
         bounds = Camera.main.GetComponent<FollowCamera>().GetBounds();
-        rb.AddForce(force);
+        rb.AddForce(force, ForceMode2D.Impulse);
         rb.AddTorque(Random.Range(-100f, 100f));
         collisionDisabledUntil = Time.time + 3.0f;
         coll.enabled = false;

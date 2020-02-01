@@ -27,8 +27,8 @@ public class TractorBeam : MonoBehaviour
     [SerializeField]
     private LayerMask targetLayers;
 
-    private float forceStrengthBack = 20f;
-    private float forceStrengthFront = 30f;
+    private float forceStrengthBack = 5f;
+    private float forceStrengthFront = 10f;
     private float bufferSize = 0.1f;
     private bool isActive = false;
 

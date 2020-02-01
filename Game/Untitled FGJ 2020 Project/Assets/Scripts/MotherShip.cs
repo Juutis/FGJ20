@@ -64,7 +64,7 @@ public class MotherShip : MonoBehaviour
         {
             dir = Vector2.down;
         }
-        var force = dir.normalized * Random.Range(2000f, 3000f);
+        var force = dir.normalized * Random.Range(100f, 200f);
         part.Launch(force);
         availableParts.Remove(part);
 
