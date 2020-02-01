@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 5790898156771207635}
   - component: {fileID: 5790898156771207215}
   m_Layer: 0
-  m_Name: background
+  m_Name: SpaceBackground
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -28,7 +28,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5790898156771207636}
   m_LocalRotation: {x: -0.7071068, y: -0, z: -0, w: 0.7071068}
-  m_LocalPosition: {x: -5.0627804, y: -2.873343, z: 17.449953}
+  m_LocalPosition: {x: 0, y: 0, z: 20}
   m_LocalScale: {x: 100, y: 100, z: 100}
   m_Children:
   - {fileID: 5790898157828805544}

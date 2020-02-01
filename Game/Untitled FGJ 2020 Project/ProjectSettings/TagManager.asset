@@ -8,6 +8,7 @@ TagManager:
   - MotherShip
   - WarpEffect
   - PlayerProjectile
+  - ZoomOutTrigger
   layers:
   - Default
   - TransparentFX
