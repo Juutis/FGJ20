@@ -111,7 +111,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   background: {fileID: 5790898156771207634}
-  warpColor: {r: 1, g: 0, b: 0.775959, a: 0}
+  warpColor: {r: 0.404, g: 0, b: 0.045400377, a: 0}
   warpDurationStart: 0.1
   warpDurationEnd: 0.3
 --- !u!1 &5790898156877201834
@@ -336,7 +336,7 @@ ParticleSystem:
       serializedVersion: 2
       minMaxState: 0
       minColor: {r: 1, g: 1, b: 1, a: 1}
-      maxColor: {r: 0.016310664, g: 0, b: 0.24528301, a: 1}
+      maxColor: {r: 0, g: 0, b: 0, a: 1}
       maxGradient:
         serializedVersion: 2
         key0: {r: 1, g: 1, b: 1, a: 1}
