@@ -291,6 +291,11 @@ PrefabInstance:
       propertyPath: orthographic
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2449988556590789232, guid: ce4331d5cfac0e140a3e0d8903b4ed5b,
+        type: 3}
+      propertyPath: field of view
+      value: 90
+      objectReference: {fileID: 0}
     - target: {fileID: 2449988556590789234, guid: ce4331d5cfac0e140a3e0d8903b4ed5b,
         type: 3}
       propertyPath: hideClampedArea
