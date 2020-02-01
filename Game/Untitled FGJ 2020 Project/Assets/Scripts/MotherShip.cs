@@ -10,7 +10,6 @@ public class MotherShip : MonoBehaviour
     [SerializeField]
     float lifeSupportTime = 60f;
 
-
     float health;
 
     List<ShipPart> shipParts = new List<ShipPart>(),
@@ -19,6 +18,8 @@ public class MotherShip : MonoBehaviour
     UI ui;
 
     private float lifeSupportTimer = -1f;
+
+    bool readyToWarp = false;
 
 
     // Start is called before the first frame update
@@ -50,6 +51,7 @@ public class MotherShip : MonoBehaviour
         {
             ui.UpdateLifeSupportTimer(Mathf.Max(0.0f, lifeSupportTimer - Time.time));
         }
+        Debug.Log(countEngines() + " " + countLifeSupports());
     }
 
     public void LaunchRandomPart()
@@ -77,6 +79,8 @@ public class MotherShip : MonoBehaviour
             }
             ui.UpdateLifeSupportTimer(Mathf.Max(0.0f, lifeSupportTimer - Time.time));
         }
+
+        updateReadyToWarp();
     }
 
     private ShipPart getRandomPart()
@@ -87,12 +91,18 @@ public class MotherShip : MonoBehaviour
 
     public void AttachPart(ShipPart part)
     {
-        availableParts.Add(part);
+        if (!availableParts.Contains(part))
+        {
+            availableParts.Add(part);
+        }
+
         if (countLifeSupports() > 0)
         {
             ui.HideLifeSupportWarning();
             lifeSupportTimer = -1.0f;
         }
+
+        updateReadyToWarp();
     }
 
     public void Hurt(float damage)
@@ -129,5 +139,15 @@ public class MotherShip : MonoBehaviour
             }
         }
         return result;
+    }
+
+    private void updateReadyToWarp()
+    {
+        readyToWarp = countEngines() == 2;
+    }
+
+    public bool IsReadyToWarp()
+    {
+        return readyToWarp;
     }
 }

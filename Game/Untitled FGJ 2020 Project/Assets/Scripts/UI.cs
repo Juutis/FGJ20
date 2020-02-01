@@ -11,6 +11,9 @@ public class UI : MonoBehaviour
     [SerializeField]
     Text lifeSupportTimer;
 
+    [SerializeField]
+    GameObject warpText;
+
     int lastTimeLeft = int.MaxValue;
 
     // Start is called before the first frame update
@@ -44,5 +47,15 @@ public class UI : MonoBehaviour
     public void HideLifeSupportWarning()
     {
         lifeSupportWarning.SetActive(false);
+    }
+
+    public void ShowWarpText()
+    {
+        warpText.SetActive(true);
+    }
+
+    public void HideWarpText()
+    {
+        warpText.SetActive(false);
     }
 }
