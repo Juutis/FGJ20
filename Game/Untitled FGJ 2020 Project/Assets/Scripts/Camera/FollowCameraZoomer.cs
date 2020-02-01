@@ -37,12 +37,15 @@ public class FollowCameraZoomer : MonoBehaviour
 
     private bool isZooming = false;
 
+    private float fovFactor = 6.0f;
+
     void Start()
     {
         FindZoomOutTriggers();
         target = GameObject.FindGameObjectWithTag("Player").transform;
         targetCamera = GetComponent<Camera>();
-        originalZoom = targetCamera.orthographicSize;
+        //originalZoom = targetCamera.orthographicSize;
+        originalZoom = targetCamera.fieldOfView / fovFactor;
     }
 
     void FindZoomOutTriggers() {
@@ -90,11 +93,11 @@ public class FollowCameraZoomer : MonoBehaviour
         zoomTimer += Time.deltaTime / zoomDuration;
         float lerp = Mathf.Lerp(startingZoom, targetZoom, zoomTimer);
         targetCamera.orthographicSize = lerp;
-        targetCamera.fieldOfView = lerp * 6;
+        targetCamera.fieldOfView = lerp * fovFactor;
         if (Mathf.Abs(targetCamera.orthographicSize - targetZoom) < 0.05f)
         {
             targetCamera.orthographicSize = targetZoom;
-            targetCamera.fieldOfView = targetZoom * 6;
+            targetCamera.fieldOfView = targetZoom * fovFactor;
             isZooming = false;
             zoomTimer = 0f;
         }
@@ -102,7 +105,8 @@ public class FollowCameraZoomer : MonoBehaviour
 
     private void StartZooming()
     {
-        startingZoom = targetCamera.orthographicSize;
+        //startingZoom = targetCamera.orthographicSize;
+        startingZoom = targetCamera.fieldOfView / fovFactor;
         if (zoomState == FollowCameraZoomState.ZoomedIn)
         {
             targetZoom = startingZoom - zoomSize;
