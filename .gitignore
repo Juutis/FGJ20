@@ -45,3 +45,5 @@ Thumbs.db
 Readme.md.meta
 *.csproj
 *.sln
+
+**/.vs/**

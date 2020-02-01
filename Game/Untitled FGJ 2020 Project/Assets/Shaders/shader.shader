@@ -5,6 +5,7 @@
         _MainTex ("Texture", 2D) = "white" {}
 		_MainColor ("Main color", Color) = (0, 0, 0, 1)
 		_SecondaryColor ("Secondary color", Color) = (1, 1, 1, 1)
+		_Intensity ("Intensity", Float) = 1.0
     }
     SubShader
     {
@@ -38,6 +39,7 @@
             float4 _MainTex_ST;
 			float4 _MainColor;
 			float4 _SecondaryColor;
+			float _Intensity;
 
             v2f vert (appdata v)
             {
@@ -64,7 +66,7 @@
 				}
                 // apply fog
                 //UNITY_APPLY_FOG(i.fogCoord, col);
-                return retcol;
+                return retcol * _Intensity;
             }
             ENDCG
         }
