@@ -15,7 +15,7 @@ MonoBehaviour:
   mass: 1
   angularDrag: 1
   linearDrag: 1
-  rotationSpeed: 200
+  rotationSpeed: 320
   rotationForceMode2D: 0
   velocityMagnitudeMax: 11
   forwardSpeed: 20

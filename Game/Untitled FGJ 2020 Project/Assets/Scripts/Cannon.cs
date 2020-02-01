@@ -85,19 +85,22 @@ public class Cannon : MonoBehaviour
             var shipDir = shipPos - curPos;
 
             //TODO: limit angle to 180 degrees
-            float angleDiff = Vector3.SignedAngle(barrel.transform.up, shipDir, Vector3.forward);
-            float rotateDir = angleDiff < 0 ? -1 : 1;
-            float rotateAmount = Mathf.Min(Mathf.Abs(angleDiff), Time.deltaTime * 90);
-            barrel.transform.Rotate(Vector3.forward, rotateAmount * rotateDir);
-
-            if(rotateAmount < 0.1f)
+            if (state == CannonStates.Aiming)
             {
-                state = CannonStates.Shooting;
+                float angleDiff = Vector3.SignedAngle(barrel.transform.up, shipDir, Vector3.forward);
+                float rotateDir = angleDiff < 0 ? -1 : 1;
+                float rotateAmount = Mathf.Min(Mathf.Abs(angleDiff), Time.deltaTime * 90);
+                barrel.transform.Rotate(Vector3.forward, rotateAmount * rotateDir);
+
+                if (rotateAmount < 0.1f)
+                {
+                    state = CannonStates.Shooting;
+                }
             }
 
-            if(state == CannonStates.Shooting)
+            if (state == CannonStates.Shooting)
             {
-                float targetDistance = Vector3.Distance(barrel.transform.position, motherShip.transform.position);
+                float targetDistance = Vector3.Distance(transform.position, motherShip.transform.position);
                 Vector3 scale = laser.transform.localScale;
 
                 Vector3 target = barrel.transform.position;
@@ -109,17 +112,20 @@ public class Cannon : MonoBehaviour
                 laserHitParticleSystem.transform.rotation = Quaternion.Euler(new Vector3(0, 0, angle));
                 laserHitParticleSystem.transform.Rotate(0, 180, 0);
 
+
                 if (targetDistance > (scale.x / laserScaleMultiplier))
                 {
                     laser.transform.localScale = new Vector3(scale.x + laserShootSpeed*Time.deltaTime, 1, 1);
                 }
                 else
                 {
+                    barrel.transform.Rotate(Vector3.forward, 5 * Time.deltaTime);
+                    laserHitParticleSystem.transform.position = laser.transform.position + laser.transform.right * scale.x / laserScaleMultiplier * 0.89f;
                     if (laserHitStarted < 0)
                     {
                         laserHitStarted = Time.time;
                         laserHitParticleSystem.Play();
-                        laserHitParticleSystem.transform.position = barrel.transform.position + (motherShip.transform.position - barrel.transform.position) * 0.75f;
+                        laserHitParticleSystem.transform.position = laser.transform.position + laser.transform.right * scale.x / laserScaleMultiplier;
                         motherShip.Hurt(Random.Range(damageMin, damageMax));
                     }
                     if(laserHitStarted + laserHitTime < Time.time)
