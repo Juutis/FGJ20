@@ -34,6 +34,7 @@ public class Cannon : MonoBehaviour
 
     [SerializeField]
     private float damageMin = 3.0f;
+    [SerializeField]
     private float damageMax = 5.0f;
 
     void Start()
