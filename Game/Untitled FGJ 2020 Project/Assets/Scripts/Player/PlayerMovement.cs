@@ -15,21 +15,7 @@ public class PlayerMovement : MonoBehaviour {
 
     private float axisTreshold = 0.05f;
 
-    [SerializeField]
-    [Range(1f, 20f)]
-    private float rotationSpeed = 5f;
-
-    [SerializeField]
-    [Range(1f, 20f)]
-    private float velocityMagnitudeMax  = 5f;
-
-    [SerializeField]
-    [Range(1f, 20f)]
-    private float forwardSpeed = 5f;
-
-    [SerializeField]
-    [Range(1f, 20f)]
-    private float backwardSpeed = 2.5f;
+    private PlayerMovementConfig config;
 
     private enum ShipDirection
     {
@@ -38,7 +24,12 @@ public class PlayerMovement : MonoBehaviour {
     }
 
     private void Start() {
+        config = (PlayerMovementConfig) Resources.Load("Configs/PlayerMovementConfig");
+        if (config == null) {
+            Debug.LogWarning("Couldn't find Configs/PlayerMovementConfig!");
+        }
         rb2d = GetComponent<Rigidbody2D>();
+        rb2d.inertia = config.Inertia;
         FindThrusters();
     }
 
@@ -80,7 +71,7 @@ public class PlayerMovement : MonoBehaviour {
     }
 
     private void TurnShip(float horizontalAxis) {
-        rb2d.AddTorque(-horizontalAxis * rotationSpeed, ForceMode2D.Force);
+        rb2d.AddTorque(-horizontalAxis * config.RotationSpeed, ForceMode2D.Force);
     }
 
     private void HandleVerticalAxis(float verticalAxis) {
@@ -99,12 +90,12 @@ public class PlayerMovement : MonoBehaviour {
     }
 
     private void MoveShip(ShipDirection direction) {
-        if (rb2d.velocity.magnitude < velocityMagnitudeMax) {
+        if (rb2d.velocity.magnitude < config.VelocityMagnitudeMax) {
             Vector2 vDirection = Vector2.up;
-            float speed = forwardSpeed;
+            float speed = config.ForwardSpeed;
             if (direction == ShipDirection.Backward) {
                 vDirection = -vDirection;
-                speed = backwardSpeed;
+                speed = config.BackwardSpeed;
             }
             rb2d.AddRelativeForce(vDirection * speed, ForceMode2D.Force);
         }

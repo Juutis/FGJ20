@@ -132,7 +132,7 @@ GameObject:
   - component: {fileID: 241162598}
   - component: {fileID: 241162599}
   - component: {fileID: 241162597}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: frontThrusterRight
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -297,6 +297,64 @@ LineRenderer:
     generateLightingData: 0
   m_UseWorldSpace: 0
   m_Loop: 0
+--- !u!1 &281427437
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 281427440}
+  - component: {fileID: 281427439}
+  - component: {fileID: 281427438}
+  m_Layer: 0
+  m_Name: ProjectileManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &281427438
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 281427437}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 20abbb52d5cdf5346bfdc54ff7e734b5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  poolSize: 100
+  spawnMore: 1
+--- !u!114 &281427439
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 281427437}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 17b3f2cd9603d014299987d9a7a64e94, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!4 &281427440
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 281427437}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &359112150
 GameObject:
   m_ObjectHideFlags: 0
@@ -308,7 +366,7 @@ GameObject:
   - component: {fileID: 359112152}
   - component: {fileID: 359112153}
   - component: {fileID: 359112151}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: leftNavigationThruster
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -665,8 +723,9 @@ GameObject:
   m_Component:
   - component: {fileID: 816180386}
   - component: {fileID: 816180385}
+  - component: {fileID: 816180387}
   m_Layer: 0
-  m_Name: New Sprite
+  m_Name: Ball
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -736,6 +795,22 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!58 &816180387
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 816180384}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Radius: 10.24
 --- !u!1 &1362021297
 GameObject:
   m_ObjectHideFlags: 0
@@ -747,7 +822,7 @@ GameObject:
   - component: {fileID: 1362021299}
   - component: {fileID: 1362021300}
   - component: {fileID: 1362021298}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: rightNavigationThruster
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -913,6 +988,36 @@ LineRenderer:
     generateLightingData: 0
   m_UseWorldSpace: 0
   m_Loop: 0
+--- !u!1 &1408038841
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1408038842}
+  m_Layer: 8
+  m_Name: rightCannon
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1408038842
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1408038841}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.24, y: 0.1, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1487301600}
+  m_RootOrder: 6
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1487301597
 GameObject:
   m_ObjectHideFlags: 0
@@ -925,7 +1030,9 @@ GameObject:
   - component: {fileID: 1487301601}
   - component: {fileID: 1487301599}
   - component: {fileID: 1487301598}
-  m_Layer: 0
+  - component: {fileID: 1487301602}
+  - component: {fileID: 1487301603}
+  m_Layer: 8
   m_Name: Player
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -1019,6 +1126,8 @@ Transform:
   - {fileID: 241162598}
   - {fileID: 359112152}
   - {fileID: 1362021299}
+  - {fileID: 2061025464}
+  - {fileID: 1408038842}
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1038,6 +1147,36 @@ MonoBehaviour:
   velocityMagnitudeMax: 6
   forwardSpeed: 2.06
   backwardSpeed: 1.01
+  inertia: 0.3
+--- !u!114 &1487301602
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1487301597}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f02448b7c01b9b848aa7724e18e7fa9c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  config: {fileID: 0}
+--- !u!58 &1487301603
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1487301597}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: -0.03}
+  serializedVersion: 2
+  m_Radius: 0.28
 --- !u!1 &2019842193
 GameObject:
   m_ObjectHideFlags: 0
@@ -1049,7 +1188,7 @@ GameObject:
   - component: {fileID: 2019842195}
   - component: {fileID: 2019842196}
   - component: {fileID: 2019842194}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: backThruster
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1215,6 +1354,36 @@ LineRenderer:
     generateLightingData: 0
   m_UseWorldSpace: 0
   m_Loop: 0
+--- !u!1 &2061025463
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2061025464}
+  m_Layer: 8
+  m_Name: leftCannon
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2061025464
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2061025463}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.24, y: 0.1, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1487301600}
+  m_RootOrder: 5
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2123923772
 GameObject:
   m_ObjectHideFlags: 0
@@ -1226,7 +1395,7 @@ GameObject:
   - component: {fileID: 2123923774}
   - component: {fileID: 2123923775}
   - component: {fileID: 2123923773}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: frontThrusterLeft
   m_TagString: Untagged
   m_Icon: {fileID: 0}
