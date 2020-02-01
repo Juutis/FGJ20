@@ -7,14 +7,12 @@ public class WarpEffect : MonoBehaviour
     [SerializeField]
     MeshRenderer background;
 
-    [SerializeField]
     SpriteRenderer[] objects; 
 
     [SerializeField]
     Color warpColor;
-
-    [SerializeField]
-    ParticleSystem[] warpEffects;
+    
+    List<ParticleSystem> warpEffects = new List<ParticleSystem>();
 
     [SerializeField]
     float warpDurationStart = 1.0f;
@@ -22,7 +20,7 @@ public class WarpEffect : MonoBehaviour
     float warpDurationEnd = 1.0f;
 
     private Material bgMaterial;
-    private Color origBgColor;
+    private Color origBgColorMain, origBgColorSecondary;
 
     private bool warp = false;
     private float warpTimer = 0;
@@ -35,7 +33,16 @@ public class WarpEffect : MonoBehaviour
     void Start()
     {
         bgMaterial = background.material;
-        origBgColor = bgMaterial.color;
+        origBgColorMain = bgMaterial.GetColor("_MainColor");
+        origBgColorSecondary = bgMaterial.GetColor("_SecondaryColor");
+
+        GameObject motherShip = GameObject.FindGameObjectWithTag("MotherShip");
+        objects = motherShip.GetComponentsInChildren<SpriteRenderer>();
+
+        foreach (var obj in GameObject.FindGameObjectsWithTag("WarpEffect"))
+        {
+            warpEffects.Add(obj.GetComponent<ParticleSystem>());
+        }
     }
 
     // Update is called once per frame
@@ -58,7 +65,8 @@ public class WarpEffect : MonoBehaviour
             if (warp)
             {
                 float lerp = 1.0f - (warpTimer - Time.time) / warpDurationStart;
-                bgMaterial.color = Color.Lerp(origBgColor, warpColor, lerp);
+                bgMaterial.SetColor("_MainColor", Color.Lerp(origBgColorMain, warpColor, lerp));
+                bgMaterial.SetColor("_SecondaryColor", Color.Lerp(origBgColorSecondary, warpColor, lerp));
                 foreach (var o in objects)
                 {
                     o.material.SetFloat("_Intensity", 1.0f - lerp);
@@ -66,7 +74,8 @@ public class WarpEffect : MonoBehaviour
             } else
             {
                 float lerp = 1.0f - (warpTimer - Time.time) / warpDurationEnd;
-                bgMaterial.color = Color.Lerp(warpColor, origBgColor, lerp);
+                bgMaterial.SetColor("_MainColor", Color.Lerp(warpColor, origBgColorMain, lerp));
+                bgMaterial.SetColor("_SecondaryColor", Color.Lerp(warpColor, origBgColorSecondary, lerp));
                 foreach (var o in objects)
                 {
                     o.material.SetFloat("_Intensity", lerp);
@@ -80,7 +89,8 @@ public class WarpEffect : MonoBehaviour
             {
                 if (warp)
                 {
-                    bgMaterial.color = warpColor;
+                    bgMaterial.SetColor("_MainColor", warpColor);
+                    bgMaterial.SetColor("_SecondaryColor", warpColor);
                     foreach (var o in objects)
                     {
                         o.material.SetFloat("_Intensity", 0.0f);
@@ -88,7 +98,8 @@ public class WarpEffect : MonoBehaviour
                 }
                 else
                 {
-                    bgMaterial.color = origBgColor;
+                    bgMaterial.SetColor("_MainColor", origBgColorMain);
+                    bgMaterial.SetColor("_SecondaryColor", origBgColorSecondary);
                     foreach (var o in objects)
                     {
                         o.material.SetFloat("_Intensity", 1.0f);
@@ -116,13 +127,6 @@ public class WarpEffect : MonoBehaviour
 
     public void Warp()
     {
-        //bgMaterial.DisableKeyword("_EMISSION");
-        bgMaterial.color = warpColor;
-
-        foreach (var o in objects)
-        {
-            o.material.SetFloat("_Intensity", 0f);
-        }
 
         foreach (var effect in warpEffects)
         {
@@ -135,12 +139,6 @@ public class WarpEffect : MonoBehaviour
 
     public void UnWarp()
     {
-        //bgMaterial.EnableKeyword("_EMISSION");
-        background.material.color = origBgColor;
-        foreach (var o in objects)
-        {
-            o.material.SetFloat("_Intensity", 1f);
-        }
 
         foreach (var effect in warpEffects)
         {

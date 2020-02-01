@@ -55,7 +55,7 @@
                 // sample the texture
                 fixed4 col = tex2D(_MainTex, i.uv);
 				if (col.a < 0.1) discard;
-				fixed4 retcol = (0, 0, 0, 0);
+				fixed4 retcol;
 				if (col.r > 0.5) {
 					retcol = _MainColor;
 					retcol.a = col.a;
