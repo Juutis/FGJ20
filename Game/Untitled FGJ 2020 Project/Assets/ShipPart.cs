@@ -12,6 +12,8 @@ public class ShipPart : MonoBehaviour
     Vector3 startPos;
     Quaternion startRotation;
 
+    MotherShip ship;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -19,6 +21,7 @@ public class ShipPart : MonoBehaviour
         coll = GetComponent<Collider2D>();
         startPos = transform.position;
         startRotation = transform.rotation;
+        ship = GameObject.FindGameObjectWithTag("MotherShip").GetComponent<MotherShip>();
     }
 
     // Update is called once per frame
@@ -43,5 +46,6 @@ public class ShipPart : MonoBehaviour
         transform.position = startPos;
         transform.rotation = startRotation;
         rb.simulated = false;
+        ship.AttachPart(this);
     }
 }

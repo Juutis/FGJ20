@@ -46,4 +46,9 @@ public class MotherShip : MonoBehaviour
         int idx = Random.Range(0, availableParts.Count);
         return availableParts[idx];
     }
+
+    public void AttachPart(ShipPart part)
+    {
+        availableParts.Add(part);
+    }
 }
