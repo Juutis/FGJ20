@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+
 public class MotherShip : MonoBehaviour
 {
     [SerializeField]
@@ -14,6 +15,7 @@ public class MotherShip : MonoBehaviour
 
     List<ShipPart> shipParts = new List<ShipPart>(),
         availableParts = new List<ShipPart>();
+
 
     UI ui;
 
@@ -28,20 +30,11 @@ public class MotherShip : MonoBehaviour
         availableParts.AddRange(shipParts);
         health = healthPerModule;
         ui = GameObject.FindGameObjectWithTag("UI").GetComponent<UI>();
-        
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.R))
-        {
-            foreach (var part in shipParts)
-            {
-                part.Repair();
-            }
-        }
-
         if (Input.GetKeyDown(KeyCode.T))
         {
             Hurt(5);
@@ -65,7 +58,7 @@ public class MotherShip : MonoBehaviour
             dir = Vector2.down;
         }
         var force = dir.normalized * Random.Range(100f, 200f);
-        part.Launch(force);
+        part.Launch(force, shipParts);
         availableParts.Remove(part);
 
         if (countLifeSupports() <= 0)
