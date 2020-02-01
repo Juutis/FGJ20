@@ -36,6 +36,7 @@ public class ShipPart : MonoBehaviour
     public void Launch(Vector2 force)
     {
         rb.AddForce(force);
+        rb.AddTorque(Random.Range(-10f, 10f));
         collisionDisabledUntil = Time.time + 3.0f;
         coll.enabled = false;
         rb.simulated = true;
