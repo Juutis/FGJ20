@@ -7,11 +7,18 @@ public class MotherShip : MonoBehaviour
     [SerializeField]
     float healthPerModule = 10f;
 
+    [SerializeField]
+    float lifeSupportTime = 60f;
+
 
     float health;
 
     List<ShipPart> shipParts = new List<ShipPart>(),
         availableParts = new List<ShipPart>();
+
+    UI ui;
+
+    private float lifeSupportTimer = -1f;
 
 
     // Start is called before the first frame update
@@ -20,6 +27,7 @@ public class MotherShip : MonoBehaviour
         shipParts.AddRange(GetComponentsInChildren<ShipPart>());
         availableParts.AddRange(shipParts);
         health = healthPerModule;
+        ui = GameObject.FindGameObjectWithTag("UI").GetComponent<UI>();
     }
 
     // Update is called once per frame
@@ -36,6 +44,11 @@ public class MotherShip : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.T))
         {
             Hurt(5);
+        }
+
+        if (lifeSupportTimer > 0)
+        {
+            ui.UpdateLifeSupportTimer(Mathf.Max(0.0f, lifeSupportTimer - Time.time));
         }
     }
 
@@ -54,6 +67,16 @@ public class MotherShip : MonoBehaviour
         var force = dir.normalized * Random.Range(2000f, 3000f);
         part.Launch(force);
         availableParts.Remove(part);
+
+        if (countLifeSupports() <= 0)
+        {
+            ui.ShowLifeSupportWarning();
+            if (lifeSupportTimer < 0.0f)
+            {
+                lifeSupportTimer = Time.time + lifeSupportTime;
+            }
+            ui.UpdateLifeSupportTimer(Mathf.Max(0.0f, lifeSupportTimer - Time.time));
+        }
     }
 
     private ShipPart getRandomPart()
@@ -65,6 +88,11 @@ public class MotherShip : MonoBehaviour
     public void AttachPart(ShipPart part)
     {
         availableParts.Add(part);
+        if (countLifeSupports() > 0)
+        {
+            ui.HideLifeSupportWarning();
+            lifeSupportTimer = -1.0f;
+        }
     }
 
     public void Hurt(float damage)
@@ -75,5 +103,31 @@ public class MotherShip : MonoBehaviour
             LaunchRandomPart();
             health = healthPerModule;
         }
+    }
+
+    private int countLifeSupports()
+    {
+        int result = 0;
+        foreach (var part in availableParts)
+        {
+            if (part.isLifeSupport)
+            {
+                result++;
+            }
+        }
+        return result;
+    }
+
+    private int countEngines()
+    {
+        int result = 0;
+        foreach (var part in availableParts)
+        {
+            if (!part.isLifeSupport)
+            {
+                result++;
+            }
+        }
+        return result;
     }
 }

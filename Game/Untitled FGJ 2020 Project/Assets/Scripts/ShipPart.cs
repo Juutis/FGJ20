@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class ShipPart : MonoBehaviour
 {
+    [SerializeField]
+    public bool isLifeSupport = false;
+
     Rigidbody2D rb;
     Collider2D coll;
 
