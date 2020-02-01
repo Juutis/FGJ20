@@ -3,6 +3,10 @@ using System.Collections;
 
 [RequireComponent(typeof(Rigidbody2D))]
 public class PlayerMovement : MonoBehaviour {
+
+    [SerializeField]
+    GameObject sprite;
+
     private Rigidbody2D rb2d;
 
 
@@ -18,6 +22,7 @@ public class PlayerMovement : MonoBehaviour {
     private PlayerMovementConfig config;
 
     private bool active = true;
+    float horizontalAxis, verticalAxis;
 
     private enum ShipDirection
     {
@@ -44,7 +49,7 @@ public class PlayerMovement : MonoBehaviour {
     }
 
     private GameObject FindChildObject (string name) {
-        foreach(Transform child in transform) {
+        foreach(Transform child in transform.GetComponentsInChildren<Transform>()) {
             if (child.name == name) {
                 return child.gameObject;
             }
@@ -54,15 +59,14 @@ public class PlayerMovement : MonoBehaviour {
     
     private void Update()
     {
+        horizontalAxis = Input.GetAxis("Horizontal");
+        verticalAxis = Input.GetAxis("Vertical");
         if (active)
         {
             rb2d.drag = config.AngularDrag;
             rb2d.angularDrag = config.AngularDrag;
             rb2d.mass = config.Mass;
-            float horizontalAxis = Input.GetAxis("Horizontal");
-            float verticalAxis = Input.GetAxis("Vertical");
             HandleHorizontalAxis(horizontalAxis);
-            HandleVerticalAxis(verticalAxis);
         }
     }
 
@@ -71,6 +75,10 @@ public class PlayerMovement : MonoBehaviour {
         if (!active)
         {
             rb2d.velocity = Vector2.zero;
+        }
+        else
+        {
+            HandleVerticalAxis(verticalAxis);
         }
     }
 
@@ -88,7 +96,8 @@ public class PlayerMovement : MonoBehaviour {
     }
 
     private void TurnShip(float horizontalAxis) {
-        rb2d.AddTorque(-horizontalAxis * config.RotationSpeed, config.RotationForceMode2D);
+        //rb2d.AddTorque(-horizontalAxis * config.RotationSpeed, config.RotationForceMode2D);
+        sprite.transform.Rotate(Vector3.forward, - horizontalAxis * config.RotationSpeed * Time.deltaTime);
     }
 
     private void HandleVerticalAxis(float verticalAxis) {
@@ -108,13 +117,13 @@ public class PlayerMovement : MonoBehaviour {
 
     private void MoveShip(ShipDirection direction) {
         if (rb2d.velocity.magnitude < config.VelocityMagnitudeMax) {
-            Vector2 vDirection = Vector2.up;
+            Vector2 vDirection = sprite.transform.up;
             float speed = config.ForwardSpeed;
             if (direction == ShipDirection.Backward) {
                 vDirection = -vDirection;
                 speed = config.BackwardSpeed;
             }
-            rb2d.AddRelativeForce(vDirection * speed, config.SpeedForceMode2D);
+            rb2d.AddForce(vDirection * speed, config.SpeedForceMode2D);
         }
     }
 

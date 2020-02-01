@@ -13,11 +13,11 @@ MonoBehaviour:
   m_Name: PlayerMovementConfig
   m_EditorClassIdentifier: 
   mass: 1
-  angularDrag: 6
-  linearDrag: 50
-  rotationSpeed: 0.25
+  angularDrag: 1
+  linearDrag: 1
+  rotationSpeed: 200
   rotationForceMode2D: 0
   velocityMagnitudeMax: 11
-  forwardSpeed: 9.1
+  forwardSpeed: 20
   speedForceMode2D: 0
-  backwardSpeed: 5
+  backwardSpeed: 10

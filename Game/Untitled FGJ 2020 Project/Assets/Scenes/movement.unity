@@ -301,6 +301,21 @@ PrefabInstance:
       propertyPath: hideClampedArea
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2449988557822905115, guid: ce4331d5cfac0e140a3e0d8903b4ed5b,
+        type: 3}
+      propertyPath: m_Constraints
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 2449988557822905115, guid: ce4331d5cfac0e140a3e0d8903b4ed5b,
+        type: 3}
+      propertyPath: m_CollisionDetection
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4021423604992289859, guid: ce4331d5cfac0e140a3e0d8903b4ed5b,
+        type: 3}
+      propertyPath: m_Offset.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4768788577282665455, guid: ce4331d5cfac0e140a3e0d8903b4ed5b,
         type: 3}
       propertyPath: m_LocalPosition.x

@@ -26,7 +26,7 @@ public class PlayerMovementConfig : ScriptableObject
     public float LinearDrag { get { return linearDrag; } }
     
     [SerializeField]
-    [Range(0, 50f)]
+    [Range(0, 1000f)]
     private float rotationSpeed = 5f;
     public float RotationSpeed { get { return rotationSpeed; } }
 
