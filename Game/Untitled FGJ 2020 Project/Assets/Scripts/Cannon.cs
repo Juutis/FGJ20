@@ -44,6 +44,7 @@ public class Cannon : MonoBehaviour
         main.duration = chargingTime;
         chargeStarted = Time.time;
         chargingEmission = chargingParticleSystem.emission;
+        motherShip = GameObject.FindGameObjectWithTag("MotherShip");
     }
 
     // Update is called once per frame
