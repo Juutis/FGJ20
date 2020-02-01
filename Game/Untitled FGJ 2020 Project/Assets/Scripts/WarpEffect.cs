@@ -26,8 +26,12 @@ public class WarpEffect : MonoBehaviour
     private float warpTimer = 0;
     private bool warpEffectPlaying = false;
 
+    private float origScaleX = 1.0f;
+    private float origScaleY = 1.0f;
     private float scaleX = 1.0f;
     private float scaleY = 1.0f;
+
+    GameObject motherShip;
 
     // Start is called before the first frame update
     void Start()
@@ -36,8 +40,11 @@ public class WarpEffect : MonoBehaviour
         origBgColorMain = bgMaterial.GetColor("_MainColor");
         origBgColorSecondary = bgMaterial.GetColor("_SecondaryColor");
 
-        GameObject motherShip = GameObject.FindGameObjectWithTag("MotherShip");
+        motherShip = GameObject.FindGameObjectWithTag("MotherShip");
         objects = motherShip.GetComponentsInChildren<SpriteRenderer>();
+
+        origScaleX = motherShip.transform.localScale.x;
+        origScaleY = motherShip.transform.localScale.y;
 
         foreach (var obj in GameObject.FindGameObjectsWithTag("WarpEffect"))
         {
@@ -76,10 +83,11 @@ public class WarpEffect : MonoBehaviour
                 float lerp = 1.0f - (warpTimer - Time.time) / warpDurationEnd;
                 bgMaterial.SetColor("_MainColor", Color.Lerp(warpColor, origBgColorMain, lerp));
                 bgMaterial.SetColor("_SecondaryColor", Color.Lerp(warpColor, origBgColorSecondary, lerp));
+
+                motherShip.transform.localScale = new Vector3(Mathf.Lerp(scaleX, origScaleX, lerp), Mathf.Lerp(scaleY, origScaleY, lerp), 1.0f);
                 foreach (var o in objects)
                 {
                     o.material.SetFloat("_Intensity", lerp);
-                    o.transform.localScale = new Vector3(Mathf.Lerp(scaleX, 1.0f, lerp), Mathf.Lerp(scaleY, 1.0f, lerp), 1.0f);
                 }
             }
         }
@@ -100,10 +108,10 @@ public class WarpEffect : MonoBehaviour
                 {
                     bgMaterial.SetColor("_MainColor", origBgColorMain);
                     bgMaterial.SetColor("_SecondaryColor", origBgColorSecondary);
+                    motherShip.transform.localScale = new Vector3(origScaleX, origScaleY, 1.0f);
                     foreach (var o in objects)
                     {
                         o.material.SetFloat("_Intensity", 1.0f);
-                        o.transform.localScale = new Vector3(1.0f, 1.0f, 1.0f);
                     }
                 }
                 warpEffectPlaying = false;
@@ -113,15 +121,10 @@ public class WarpEffect : MonoBehaviour
         if (warp)
         {
             float scaleTime = Time.time - warpTimer + warpDurationStart;
-            //scaleX = 1.25f - 0.25f*Mathf.Cos(scaleTime * 2);
-            //scaleY = 0.9f + 0.1f*Mathf.Cos(-scaleTime * 2);
-            scaleX = Mathf.Log10(scaleTime + 1) + 1;
-            scaleY = 1 / (Mathf.Log10(scaleTime + 1) + 1);
+            scaleX = origScaleX * (Mathf.Log10(scaleTime + 1) + 1);
+            scaleY = origScaleY / (Mathf.Log10(scaleTime + 1) + 1);
 
-            foreach (var o in objects)
-            {
-                o.transform.localScale = new Vector3(scaleX, scaleY, 1.0f);
-            }
+            motherShip.transform.localScale = new Vector3(scaleX, scaleY, 1.0f);
         }
     }
 
