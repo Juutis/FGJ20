@@ -21,7 +21,6 @@ public class MotherShip : MonoBehaviour
 
     bool readyToWarp = false;
 
-
     // Start is called before the first frame update
     void Start()
     {
@@ -29,6 +28,7 @@ public class MotherShip : MonoBehaviour
         availableParts.AddRange(shipParts);
         health = healthPerModule;
         ui = GameObject.FindGameObjectWithTag("UI").GetComponent<UI>();
+        
     }
 
     // Update is called once per frame
@@ -51,9 +51,7 @@ public class MotherShip : MonoBehaviour
         {
             ui.UpdateLifeSupportTimer(Mathf.Max(0.0f, lifeSupportTimer - Time.time));
         }
-        Debug.Log(countEngines() + " " + countLifeSupports());
     }
-
     public void LaunchRandomPart()
     {
         if (availableParts.Count <= 0)

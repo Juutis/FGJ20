@@ -55,6 +55,20 @@ public class FollowCamera : MonoBehaviour
         clampedAreaRenderer.enabled = !hideClampedArea;
     }
 
+    public Bounds GetBounds () {
+        Bounds newBounds = new Bounds();
+        newBounds.max = new Vector3(
+            clampedAreaBounds.max.x * clampedAreaRenderer.transform.localScale.x,
+            clampedAreaBounds.max.y * clampedAreaRenderer.transform.localScale.y,
+            clampedAreaBounds.max.z * clampedAreaRenderer.transform.localScale.z
+        );
+        newBounds.min = new Vector3(
+            clampedAreaBounds.min.x * clampedAreaRenderer.transform.localScale.x,
+            clampedAreaBounds.min.y * clampedAreaRenderer.transform.localScale.y,
+            clampedAreaBounds.min.z * clampedAreaRenderer.transform.localScale.z
+        );
+        return newBounds;
+    }
     void Update()
     {
         if (!canFollow) {
