@@ -13,7 +13,8 @@ GameObject:
   - component: {fileID: 824168236977352261}
   - component: {fileID: 1134910566056898418}
   - component: {fileID: 1817855544268043071}
-  m_Layer: 0
+  - component: {fileID: 1824500620693729541}
+  m_Layer: 10
   m_Name: module1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -129,9 +130,9 @@ Rigidbody2D:
   m_Simulated: 0
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 1
-  m_LinearDrag: 1
-  m_AngularDrag: 0.05
+  m_Mass: 2
+  m_LinearDrag: 3
+  m_AngularDrag: 3
   m_GravityScale: 0
   m_Material: {fileID: 0}
   m_Interpolate: 0
@@ -151,3 +152,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isLifeSupport: 1
+--- !u!114 &1824500620693729541
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8657098925423186727}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7876dd66a791cd2449642a68579a44e4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

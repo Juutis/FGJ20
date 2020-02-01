@@ -16,6 +16,10 @@ public class ShipPart : MonoBehaviour
     Quaternion startRotation;
 
     MotherShip ship;
+    Bounds bounds;
+
+    private float xMinDistanceFromBounds = 5f;
+    private float yMinDistanceFromBounds = 5f;
 
     // Start is called before the first frame update
     void Start()
@@ -34,11 +38,22 @@ public class ShipPart : MonoBehaviour
         {
             coll.enabled = true;
         }
+        if (rb.velocity.magnitude > 0.05f) {
+            bool tooFarToTheRight = transform.position.x >= (bounds.max.x - xMinDistanceFromBounds);
+            bool tooFarToTheLeft = transform.position.x <= (bounds.min.x + xMinDistanceFromBounds);
+            bool tooFarUp = transform.position.y >= (bounds.max.y - yMinDistanceFromBounds);
+            bool tooFarDown = transform.position.y <= (bounds.min.y + yMinDistanceFromBounds);
+            if (tooFarToTheRight || tooFarToTheLeft || tooFarUp || tooFarDown) {
+                rb.velocity = Vector2.zero;
+            }
+        }
+
     }
 
     public void Launch(Vector2 force)
     {
-        rb.AddForce(force);
+        bounds = Camera.main.GetComponent<FollowCamera>().GetBounds();
+        rb.AddForce(force, ForceMode2D.Impulse);
         rb.AddTorque(Random.Range(-100f, 100f));
         collisionDisabledUntil = Time.time + 3.0f;
         coll.enabled = false;
