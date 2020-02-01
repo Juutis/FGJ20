@@ -9,6 +9,8 @@ TagManager:
   - WarpEffect
   - PlayerProjectile
   - ZoomOutTrigger
+  - UI
+  - WarpDrive
   layers:
   - Default
   - TransparentFX

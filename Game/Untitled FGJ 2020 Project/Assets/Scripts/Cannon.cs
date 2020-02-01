@@ -17,7 +17,7 @@ public class Cannon : MonoBehaviour
     private float chargeStarted = 0f;
     [SerializeField]
     private GameObject laser;
-    private float laserScaleMultiplier = 10f;
+    private float laserScaleMultiplier = 15f;
     private float laserShootSpeed = 375f;
     private float laserHitTime = 1f;
     private float laserHitStarted = -1f;
@@ -26,13 +26,16 @@ public class Cannon : MonoBehaviour
     [SerializeField]
     private float cooldownTime = 5f;
     private float cooldownStarted = -1f;
-
-    //todo: remove this, get the ref elsewhere?
-    [SerializeField]
-    private GameObject motherShip;
+    
+    private MotherShip motherShip;
     Vector3 startPos;
     [SerializeField]
     private CannonStates state = CannonStates.Charging;
+
+    [SerializeField]
+    private float damageMin = 3.0f;
+    [SerializeField]
+    private float damageMax = 5.0f;
 
     void Start()
     {
@@ -44,6 +47,7 @@ public class Cannon : MonoBehaviour
         main.duration = chargingTime;
         chargeStarted = Time.time;
         chargingEmission = chargingParticleSystem.emission;
+        motherShip = GameObject.FindGameObjectWithTag("MotherShip").GetComponent<MotherShip>();
     }
 
     // Update is called once per frame
@@ -86,7 +90,7 @@ public class Cannon : MonoBehaviour
             float rotateAmount = Mathf.Min(Mathf.Abs(angleDiff), Time.deltaTime * 90);
             barrel.transform.Rotate(Vector3.forward, rotateAmount * rotateDir);
 
-            if(rotateAmount < 0.01f)
+            if(rotateAmount < 0.1f)
             {
                 state = CannonStates.Shooting;
             }
@@ -116,6 +120,7 @@ public class Cannon : MonoBehaviour
                         laserHitStarted = Time.time;
                         laserHitParticleSystem.Play();
                         laserHitParticleSystem.transform.position = barrel.transform.position + (motherShip.transform.position - barrel.transform.position) * 0.75f;
+                        motherShip.Hurt(Random.Range(damageMin, damageMax));
                     }
                     if(laserHitStarted + laserHitTime < Time.time)
                     {

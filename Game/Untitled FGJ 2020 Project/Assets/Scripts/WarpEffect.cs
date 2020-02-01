@@ -64,7 +64,6 @@ public class WarpEffect : MonoBehaviour
             {
                 Warp();
             }
-            warp = !warp;
         }
 
         if (warpTimer > Time.time)
@@ -138,6 +137,7 @@ public class WarpEffect : MonoBehaviour
 
         warpTimer = Time.time + warpDurationStart;
         warpEffectPlaying = true;
+        warp = true;
     }
 
     public void UnWarp()
@@ -150,5 +150,6 @@ public class WarpEffect : MonoBehaviour
 
         warpTimer = Time.time + warpDurationEnd;
         warpEffectPlaying = true;
+        warp = false;
     }
 }
