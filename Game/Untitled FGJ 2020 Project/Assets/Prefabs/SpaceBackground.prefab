@@ -110,7 +110,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   background: {fileID: 5790898156771207634}
-  warpColor: {r: 0.9528302, g: 0.66839707, b: 0, a: 0}
+  warpColor: {r: 0.9150943, g: 0.6637539, b: 0, a: 1}
   warpDurationStart: 0.1
   warpDurationEnd: 0.3
 --- !u!114 &922587545424186690

@@ -5,7 +5,8 @@
 		_MainTex("Texture", 2D) = "white" {}
 		_MainColor("Main color", Color) = (0, 0, 0, 1)
 		_SecondaryColor("Secondary color", Color) = (1, 1, 1, 1)
-		_Scale("Scale", Float) = 1.0
+		_ScaleX("Scale X", Float) = 1.0
+		_ScaleY("Scale Y", Float) = 1.0
 		_ScrollSpeedX("ScrollSpeedX", Float) = 1.0
 		_ScrollSpeedY("ScrollSpeedY", Float) = 1.0
 	}
@@ -41,7 +42,8 @@
 				float4 _MainTex_ST;
 				float4 _MainColor;
 				float4 _SecondaryColor;
-				float _Scale;
+				float _ScaleX;
+				float _ScaleY;
 				float _ScrollSpeedX;
 				float _ScrollSpeedY;
 
@@ -57,7 +59,7 @@
 				fixed4 frag(v2f i) : SV_Target
 				{
 					// sample the texture
-					float2 uv = float2(i.uv.x*_Scale + _Time.y*_ScrollSpeedX, i.uv.y*_Scale + _Time.y*_ScrollSpeedY);
+					float2 uv = float2(i.uv.x*_ScaleX + _Time.y*_ScrollSpeedX, i.uv.y*_ScaleY + _Time.y*_ScrollSpeedY);
 					//fixed4 col = tex2D(_MainTex, i.uv*_Scale + _Time.y*_ScrollSpeedX);
 					fixed4 col = tex2D(_MainTex, uv);
 					if (col.a < 0.1) discard;

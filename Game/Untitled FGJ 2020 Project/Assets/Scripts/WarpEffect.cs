@@ -33,12 +33,15 @@ public class WarpEffect : MonoBehaviour
 
     GameObject motherShip;
 
+    float origBgScaleX;
+
     // Start is called before the first frame update
     void Start()
     {
         bgMaterial = background.material;
         origBgColorMain = bgMaterial.GetColor("_MainColor");
         origBgColorSecondary = bgMaterial.GetColor("_SecondaryColor");
+        origBgScaleX = bgMaterial.GetFloat("_ScaleX");
 
         motherShip = GameObject.FindGameObjectWithTag("MotherShip");
         objects = motherShip.GetComponentsInChildren<SpriteRenderer>();
@@ -84,6 +87,7 @@ public class WarpEffect : MonoBehaviour
                 bgMaterial.SetColor("_SecondaryColor", Color.Lerp(warpColor, origBgColorSecondary, lerp));
 
                 motherShip.transform.localScale = new Vector3(Mathf.Lerp(scaleX, origScaleX, lerp), Mathf.Lerp(scaleY, origScaleY, lerp), 1.0f);
+                bgMaterial.SetFloat("_ScaleX", Mathf.Lerp(bgMaterial.GetFloat("_ScaleX"), origBgScaleX, lerp));
                 foreach (var o in objects)
                 {
                     o.material.SetFloat("_Intensity", lerp);
@@ -108,6 +112,7 @@ public class WarpEffect : MonoBehaviour
                     bgMaterial.SetColor("_MainColor", origBgColorMain);
                     bgMaterial.SetColor("_SecondaryColor", origBgColorSecondary);
                     motherShip.transform.localScale = new Vector3(origScaleX, origScaleY, 1.0f);
+                    bgMaterial.SetFloat("_ScaleX", origBgScaleX);
                     foreach (var o in objects)
                     {
                         o.material.SetFloat("_Intensity", 1.0f);
@@ -124,6 +129,8 @@ public class WarpEffect : MonoBehaviour
             scaleY = origScaleY / (Mathf.Log10(scaleTime + 1) + 1);
 
             motherShip.transform.localScale = new Vector3(scaleX, scaleY, 1.0f);
+
+            bgMaterial.SetFloat("_ScaleX", origBgScaleX * scaleTime);
         }
     }
 
