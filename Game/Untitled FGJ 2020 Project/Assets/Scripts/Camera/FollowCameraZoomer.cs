@@ -88,10 +88,13 @@ public class FollowCameraZoomer : MonoBehaviour
     private void LerpZoom()
     {
         zoomTimer += Time.deltaTime / zoomDuration;
-        targetCamera.orthographicSize = Mathf.Lerp(startingZoom, targetZoom, zoomTimer);
+        float lerp = Mathf.Lerp(startingZoom, targetZoom, zoomTimer);
+        targetCamera.orthographicSize = lerp;
+        targetCamera.fieldOfView = lerp * 6;
         if (Mathf.Abs(targetCamera.orthographicSize - targetZoom) < 0.05f)
         {
             targetCamera.orthographicSize = targetZoom;
+            targetCamera.fieldOfView = targetZoom * 6;
             isZooming = false;
             zoomTimer = 0f;
         }

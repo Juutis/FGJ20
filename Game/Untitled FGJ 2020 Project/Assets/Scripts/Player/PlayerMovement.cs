@@ -17,7 +17,7 @@ public class PlayerMovement : MonoBehaviour {
 
     private PlayerMovementConfig config;
 
-    private bool active;
+    private bool active = true;
 
     private enum ShipDirection
     {

@@ -51,7 +51,6 @@ public class MotherShip : MonoBehaviour
         {
             ui.UpdateLifeSupportTimer(Mathf.Max(0.0f, lifeSupportTimer - Time.time));
         }
-        Debug.Log(countEngines() + " " + countLifeSupports());
     }
 
     public void LaunchRandomPart()
