@@ -15,6 +15,8 @@ public class FollowCamera : MonoBehaviour
     private bool followX = false;
     [SerializeField]
     private bool followY = false;
+    [SerializeField]
+    private bool hideClampedArea = true;
 
     private bool canFollow = false;
 
@@ -50,6 +52,7 @@ public class FollowCamera : MonoBehaviour
             .FindGameObjectWithTag(clampedAreaTag)
             .GetComponent<SpriteRenderer>();
         clampedAreaBounds = clampedAreaRenderer.sprite.bounds;
+        clampedAreaRenderer.enabled = !hideClampedArea;
     }
 
     void Update()
