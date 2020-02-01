@@ -113,6 +113,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 96d1258e46582c44fa1d12dbd2deabbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  zoomTriggerDistance: 8
+  zoomTriggerDistance: 10
   zoomSize: 6
   zoomDuration: 2

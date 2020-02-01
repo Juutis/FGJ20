@@ -72,7 +72,7 @@ GameObject:
   - component: {fileID: 2487702430159017312}
   - component: {fileID: 4293678352060592825}
   - component: {fileID: 4631578105605391302}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: mothership
   m_TagString: MotherShip
   m_Icon: {fileID: 0}
@@ -254,6 +254,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0a8d54f6676db4e4faed79cab50cdff2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  healthPerModule: 10
+  lifeSupportTime: 60
 --- !u!1 &2487702430651969699
 GameObject:
   m_ObjectHideFlags: 0
@@ -10053,6 +10055,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2487702430651969698}
     m_Modifications:
+    - target: {fileID: 1491665127551033029, guid: d627f3a4390c845488d0baeb67cc50ea,
+        type: 3}
+      propertyPath: shipPartType
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 4056152312366929204, guid: d627f3a4390c845488d0baeb67cc50ea,
         type: 3}
       propertyPath: m_Name
@@ -10128,6 +10135,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2487702430651969698}
     m_Modifications:
+    - target: {fileID: 1491665127551033029, guid: d627f3a4390c845488d0baeb67cc50ea,
+        type: 3}
+      propertyPath: shipPartType
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 4056152312366929204, guid: d627f3a4390c845488d0baeb67cc50ea,
         type: 3}
       propertyPath: m_Name
@@ -10198,6 +10210,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2487702430651969698}
     m_Modifications:
+    - target: {fileID: 1817855544268043071, guid: 06e56c51f10f8e6429b7b475b204cb5e,
+        type: 3}
+      propertyPath: shipPartType
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8657098925423186726, guid: 06e56c51f10f8e6429b7b475b204cb5e,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -10273,6 +10290,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2487702430651969698}
     m_Modifications:
+    - target: {fileID: 1817855544268043071, guid: 06e56c51f10f8e6429b7b475b204cb5e,
+        type: 3}
+      propertyPath: shipPartType
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8657098925423186726, guid: 06e56c51f10f8e6429b7b475b204cb5e,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -10348,6 +10370,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2487702430651969698}
     m_Modifications:
+    - target: {fileID: 1817855544268043071, guid: 06e56c51f10f8e6429b7b475b204cb5e,
+        type: 3}
+      propertyPath: shipPartType
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8657098925423186726, guid: 06e56c51f10f8e6429b7b475b204cb5e,
         type: 3}
       propertyPath: m_LocalPosition.x
