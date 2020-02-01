@@ -36,7 +36,12 @@ public class MotherShip : MonoBehaviour
             return;
         }
         var part = getRandomPart();
-        var force = new Vector2(Random.Range(-3000f, 3000f), Random.Range(-3000f, 3000f));
+        var dir = new Vector2(Random.Range(-10f, 10f), Random.Range(-10f, 10f));
+        if (dir.magnitude < 0.01f)
+        {
+            dir = Vector2.down;
+        }
+        var force = dir.normalized * Random.Range(2000f, 3000f);
         part.Launch(force);
         availableParts.Remove(part);
     }
