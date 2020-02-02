@@ -147,6 +147,7 @@ public class WarpEffect : MonoBehaviour
     }
 
     public void ComeOutOfWarp() {
+        origBgColorMain = LevelManager.main.levelColor();
         UnWarp();
         LevelManager.main.StartNextLevel();
     }

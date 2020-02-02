@@ -20,6 +20,9 @@ public class LevelManager : MonoBehaviour
 
     [SerializeField]
     private List<GameObject> levels = new List<GameObject>();
+
+    [SerializeField]
+    public List<Color> colors = new List<Color>();
     [SerializeField]
     private int currentLevelIndex = 0;
 
@@ -83,5 +86,10 @@ public class LevelManager : MonoBehaviour
             }
         }
         player.position = new Vector3(playerPosition.position.x, playerPosition.position.y, player.position.z);
+    }
+
+    public Color levelColor()
+    {
+        return colors[currentLevelIndex];
     }
 }
