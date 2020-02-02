@@ -27,14 +27,17 @@ public class LevelManager : MonoBehaviour
 
     private Transform player;
 
-    private void Start()
-    {
+    private UI ui;
+
+    private void Start() {
         player = GameObject.FindGameObjectWithTag("Player").transform;
         foreach (GameObject level in levels)
         {
             level.SetActive(false);
         }
         StartNextLevel();
+        ui = GameObject.FindGameObjectWithTag("UI").GetComponent<UI>();
+        WorldUI.main.ShowPlayerInfo();
     }
 
     public void DisableLevel()
@@ -61,10 +64,8 @@ public class LevelManager : MonoBehaviour
             player.position = new Vector3(playerPosition.position.x, playerPosition.position.y, player.position.z);
             playerPosition.gameObject.SetActive(false);
             currentLevelIndex += 1;
-        }
-        else
-        {
-            Debug.Log("The end!");
+        } else {
+            ui.Win();
         }
     }
 

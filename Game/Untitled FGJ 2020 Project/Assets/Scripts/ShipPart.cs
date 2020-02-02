@@ -235,10 +235,12 @@ public class ShipPart : MonoBehaviour
         coll.enabled = false;
         rb.simulated = true;
         targetSet = false;
+        GetComponent<Tractorable>().Activate();
     }
 
     private void Repair()
     {
+        GetComponent<Tractorable>().Deactivate();
         transform.position = dockingTarget.OriginalPosition;
         transform.rotation = dockingTarget.OriginalRotation;
         launchStarted = false;

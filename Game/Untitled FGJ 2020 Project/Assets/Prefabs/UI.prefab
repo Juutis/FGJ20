@@ -2442,17 +2442,17 @@ PrefabInstance:
     - target: {fileID: 6014803700254013139, guid: 17da61ff0b8d3c54bb4328fa16dba1de,
         type: 3}
       propertyPath: m_Text
-      value: 'You managed to reach your target, 82 G. Eridani, but at what cost.
-        Only a handful of the passengers survived and most of the supplies were lost.
+      value: 'You managed to reach your target system, 82 G. Eridani, but at what
+        cost. Only a handful of the passengers survived and most of the supplies
+        were lost.
 
 
-        Your
-        new habitat turns out not to be as hospitable as you imagined and within
-        weeks of your arrival, it''s as if you were never there.
+        Your new habitat turns out not to be as hospitable as
+        you imagined and within weeks of your arrival, it''s as if you were never
+        there.
 
 
-        Press
-        ''R'' to restart or ''Esc'' to quit.'
+        Press ''R'' to restart or ''Esc'' to quit.'
       objectReference: {fileID: 0}
     - target: {fileID: 6014803700254013139, guid: 17da61ff0b8d3c54bb4328fa16dba1de,
         type: 3}
@@ -2598,7 +2598,7 @@ PrefabInstance:
     - target: {fileID: 6014803700254013139, guid: 17da61ff0b8d3c54bb4328fa16dba1de,
         type: 3}
       propertyPath: m_Text
-      value: 'You managed to reach your target, 82 G. Eridani, without significant
+      value: 'You managed to reach your target system, 82 G. Eridani, without significant
         losses to the population.
 
 
@@ -2752,8 +2752,8 @@ PrefabInstance:
     - target: {fileID: 6014803700254013139, guid: 17da61ff0b8d3c54bb4328fa16dba1de,
         type: 3}
       propertyPath: m_Text
-      value: 'You managed to reach your target, 82 G. Eridani, but the long travel
-        wasn''t without cost. The population on your ship suffered some losses.
+      value: 'You managed to reach your target system, 82 G. Eridani, but the long
+        travel wasn''t without cost. The population on your ship suffered some losses.
 
 
         Colonizing

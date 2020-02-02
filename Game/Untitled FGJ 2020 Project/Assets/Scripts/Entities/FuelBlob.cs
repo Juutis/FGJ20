@@ -24,13 +24,14 @@ public class FuelBlob : MonoBehaviour
         circleCollider2d = GetComponent<CircleCollider2D>();
         rb2d = GetComponent<Rigidbody2D>();
         fuelDropSpot = GameObject.FindWithTag("MotherShip").GetComponent<MotherShip>().FuelDropSpot;
+        GetComponent<Tractorable>().Activate();
     }
 
     void Update()
     {
+
         HandleDocking();
     }
-
 
     private void HandleDocking()
     {
@@ -64,6 +65,7 @@ public class FuelBlob : MonoBehaviour
 
     private void StartDocking()
     {
+        GetComponent<Tractorable>().Deactivate();
         dockingPosition = transform.position;
         docking = true;
         circleCollider2d.enabled = false;
@@ -88,4 +90,5 @@ public class FuelBlob : MonoBehaviour
     private void Kill() {
         Destroy(gameObject);
     }
+
 }
