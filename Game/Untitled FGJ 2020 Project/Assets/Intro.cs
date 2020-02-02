@@ -17,7 +17,7 @@ public class Intro : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Return))
         {
-            SceneManager.LoadScene("movement");
+            SceneManager.LoadScene("main");
         }
     }
 }
