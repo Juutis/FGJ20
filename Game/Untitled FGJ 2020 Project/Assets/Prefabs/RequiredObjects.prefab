@@ -1207,6 +1207,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 4768788577282665455}
     m_Modifications:
+    - target: {fileID: 454245768347312470, guid: 23d9a50bdbd0d4b438240fb91c722d40,
+        type: 3}
+      propertyPath: m_Volume
+      value: 0.71
+      objectReference: {fileID: 0}
     - target: {fileID: 2487702430159017313, guid: 23d9a50bdbd0d4b438240fb91c722d40,
         type: 3}
       propertyPath: m_Name
@@ -1272,6 +1277,11 @@ PrefabInstance:
       propertyPath: dropSpot
       value: 
       objectReference: {fileID: 8191761142177500415}
+    - target: {fileID: 8636341442464584052, guid: 23d9a50bdbd0d4b438240fb91c722d40,
+        type: 3}
+      propertyPath: m_Volume
+      value: 0.71
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 23d9a50bdbd0d4b438240fb91c722d40, type: 3}
 --- !u!114 &8191761142177500415 stripped

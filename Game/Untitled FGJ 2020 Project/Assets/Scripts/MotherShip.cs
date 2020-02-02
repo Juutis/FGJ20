@@ -21,6 +21,14 @@ public class MotherShip : MonoBehaviour
     private FuelDropSpot dropSpot;
     public FuelDropSpot FuelDropSpot { get { return dropSpot;}}
 
+    [SerializeField]
+    private AudioSource hyperSpaceStart;
+    [SerializeField]
+    private AudioSource hyperSpaceEnd;
+
+    public AudioSource HyperSpaceStart {get {return hyperSpaceStart;}}
+    public AudioSource HyperSpaceEnd {get {return hyperSpaceEnd;}}
+
     UI ui;
 
     private float lifeSupportTimer = -1f;

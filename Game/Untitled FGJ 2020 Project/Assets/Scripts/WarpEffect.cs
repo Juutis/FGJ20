@@ -129,6 +129,7 @@ public class WarpEffect : MonoBehaviour
 
     public void Warp()
     {
+        motherShip.GetComponent<MotherShip>().HyperSpaceStart.Play();
 
         LevelManager.main.DisableLevel();
         foreach (var effect in warpEffects)
@@ -152,6 +153,7 @@ public class WarpEffect : MonoBehaviour
 
     public void UnWarp()
     {
+        motherShip.GetComponent<MotherShip>().HyperSpaceEnd.Play();
         foreach (var effect in warpEffects)
         {
             effect.Stop();
