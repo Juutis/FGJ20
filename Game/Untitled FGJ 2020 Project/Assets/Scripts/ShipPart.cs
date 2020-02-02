@@ -110,8 +110,9 @@ public class ShipPart : MonoBehaviour
                 launchStarted = false;
             }
 
-            if(targetSet && Vector3.Distance(transform.position, launchTarget) < 1f)
+            if(targetSet && Vector3.Distance(transform.position, launchTarget) < 0.5f)
             {
+                Debug.Log("moi");
                 rb.velocity = Vector2.zero;
                 launchFinished = true;
                 launchStarted = false;
