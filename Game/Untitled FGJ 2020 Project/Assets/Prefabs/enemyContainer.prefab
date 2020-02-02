@@ -23,8 +23,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 614270062154743049}
-  m_LocalRotation: {x: -0, y: -0, z: 0.8213747, w: -0.57038903}
-  m_LocalPosition: {x: 16.427862, y: 2.2321472, z: 0}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.171, y: 0.184, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 6640901025412991062}
@@ -459,8 +459,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4847498838512201814}
-  m_LocalRotation: {x: -0, y: -0, z: 0.8213747, w: -0.57038903}
-  m_LocalPosition: {x: 16.260193, y: 1.7823849, z: 0}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.171, y: 0.184, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 6640901025412991062}
@@ -1275,6 +1275,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   shootDistance: 20
+  config: {fileID: 0}
 --- !u!1 &6640901026746542678
 GameObject:
   m_ObjectHideFlags: 0
