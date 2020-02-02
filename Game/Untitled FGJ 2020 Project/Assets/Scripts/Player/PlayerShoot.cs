@@ -43,7 +43,7 @@ public class PlayerShoot : MonoBehaviour
     void Update()
     {
         intervalTimer += Time.deltaTime;
-        if (Input.GetKey(KeyCode.LeftControl) && intervalTimer > config.MinInterval) {
+        if (Input.GetKey(KeyCode.Space) && intervalTimer > config.MinInterval) {
             Shoot();
             intervalTimer = 0f;
         }

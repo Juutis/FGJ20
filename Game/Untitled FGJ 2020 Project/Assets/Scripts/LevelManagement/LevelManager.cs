@@ -35,6 +35,7 @@ public class LevelManager : MonoBehaviour
         }
         StartNextLevel();
         ui = GameObject.FindGameObjectWithTag("UI").GetComponent<UI>();
+        WorldUI.main.ShowPlayerInfo();
     }
 
     public void DisableLevel() {

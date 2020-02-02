@@ -6,6 +6,8 @@ public class PlayerTractorBeamController : MonoBehaviour
 {
 
     private TractorBeam beam;
+    private KeyCode pushKey = KeyCode.Z;
+    private KeyCode pullKey = KeyCode.X;
     void Start()
     {
         beam = GetComponentInChildren<TractorBeam>();
@@ -13,13 +15,13 @@ public class PlayerTractorBeamController : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.P)) {
+        if (Input.GetKeyDown(pushKey)) {
             beam.Activate();
             beam.SetType(TractorBeamType.Push);
-        } else if (Input.GetKeyDown(KeyCode.O)) {
+        } else if (Input.GetKeyDown(pullKey)) {
             beam.Activate();
             beam.SetType(TractorBeamType.Pull);
-        } else if (!(Input.GetKey(KeyCode.O) || Input.GetKey(KeyCode.P))) {
+        } else if (!(Input.GetKey(pullKey) || Input.GetKey(pushKey))) {
             beam.Deactivate();
         }
     }

@@ -97,10 +97,6 @@ public class UI : MonoBehaviour
             }
         }
 
-        if (Input.GetKeyDown(KeyCode.X))
-        {
-            Win();
-        }
     }
 
     public void UpdateLifeSupportTimer(float timeLeft)
