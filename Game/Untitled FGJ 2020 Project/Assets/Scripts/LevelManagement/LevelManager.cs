@@ -26,12 +26,15 @@ public class LevelManager : MonoBehaviour
     
     private Transform player;
 
+    private UI ui;
+
     private void Start() {
         player = GameObject.FindGameObjectWithTag("Player").transform;
         foreach(GameObject level in levels) {
             level.SetActive(false);
         }
         StartNextLevel();
+        ui = GameObject.FindGameObjectWithTag("UI").GetComponent<UI>();
     }
 
     public void DisableLevel() {
@@ -53,7 +56,7 @@ public class LevelManager : MonoBehaviour
             playerPosition.gameObject.SetActive(false);
             currentLevelIndex += 1;
         } else {
-            Debug.Log("The end!");
+            ui.Win();
         }
     }
 }
