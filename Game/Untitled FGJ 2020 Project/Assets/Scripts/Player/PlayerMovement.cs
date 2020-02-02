@@ -183,6 +183,7 @@ public class PlayerMovement : MonoBehaviour {
     public void Activate()
     {
         active = true;
+        reInstateControls();
     }
 
     public void Disable()

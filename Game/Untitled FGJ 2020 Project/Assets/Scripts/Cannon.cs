@@ -126,7 +126,7 @@ public class Cannon : MonoBehaviour
                         laserHitStarted = Time.time;
                         laserHitParticleSystem.Play();
                         laserHitParticleSystem.transform.position = laser.transform.position + laser.transform.right * scale.x / laserScaleMultiplier;
-                        motherShip.Hurt(Random.Range(damageMin, damageMax));
+                        motherShip.Wobble();
                     }
                     if(laserHitStarted + laserHitTime < Time.time)
                     {
@@ -134,6 +134,7 @@ public class Cannon : MonoBehaviour
                         laser.transform.localScale = new Vector3(1, 1, 1);
                         laserHitParticleSystem.Stop();
                         laserHitStarted = -1f;
+                        HurtShip();
                     }
                 }
             }
@@ -157,6 +158,10 @@ public class Cannon : MonoBehaviour
                 cooldownStarted = -1f;
             }
         }
+    }
+
+    private void HurtShip() {
+        motherShip.Hurt(Random.Range(damageMin, damageMax));
     }
 }
 
