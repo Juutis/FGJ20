@@ -59,7 +59,9 @@ public class PlayerShoot : MonoBehaviour
             Direction = leftCannon.up,
             StartingVelocity = rb2d.velocity,
             Position = leftCannon.position,
-            Rotation = leftCannon.rotation
+            Rotation = leftCannon.rotation,
+            Tag = "PlayerProjectile",
+            Layer = "PlayerProjectile"
         });
         ProjectileManager.main.SpawnProjectile(new ProjectileOptions() {
             LifeTime = config.LifeTime,
@@ -67,7 +69,9 @@ public class PlayerShoot : MonoBehaviour
             Direction = rightCannon.up,
             StartingVelocity = rb2d.velocity,
             Position = rightCannon.position,
-            Rotation = rightCannon.rotation
+            Rotation = rightCannon.rotation,
+            Tag = "PlayerProjectile",
+            Layer = "PlayerProjectile"
         });
     }
 }

@@ -9,7 +9,8 @@ public struct ProjectileOptions {
     public Vector2 StartingVelocity;
     public Vector3 Position;
     public Quaternion Rotation;
-
+    public string Tag;
+    public string Layer;
 }
 
 [RequireComponent(typeof(ProjectilePool))]

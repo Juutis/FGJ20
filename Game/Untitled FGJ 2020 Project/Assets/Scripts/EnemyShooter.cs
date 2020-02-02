@@ -100,7 +100,9 @@ public class EnemyShooter : MonoBehaviour
             Direction = leftCannon.up,
             StartingVelocity = vec,//rb2d.velocity,
             Position = leftCannon.position,
-            Rotation = leftCannon.rotation
+            Rotation = leftCannon.rotation,
+            Tag = "EnemyProjectile",
+            Layer = "EnemyProjectile"
         });
         ProjectileManager.main.SpawnProjectile(new ProjectileOptions()
         {
@@ -109,7 +111,9 @@ public class EnemyShooter : MonoBehaviour
             Direction = rightCannon.up,
             StartingVelocity = Vector2.zero,//rb2d.velocity,
             Position = rightCannon.position,
-            Rotation = rightCannon.rotation
+            Rotation = rightCannon.rotation,
+            Tag = "EnemyProjectile",
+            Layer = "EnemyProjectile"
         });
     }
 }
