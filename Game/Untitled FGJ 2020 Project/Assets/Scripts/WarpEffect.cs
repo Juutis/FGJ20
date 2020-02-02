@@ -130,6 +130,7 @@ public class WarpEffect : MonoBehaviour
     public void Warp()
     {
 
+        LevelManager.main.DisableLevel();
         foreach (var effect in warpEffects)
         {
             effect.Play();
@@ -141,7 +142,7 @@ public class WarpEffect : MonoBehaviour
         warpTimer = Time.time + warpDurationStart;
         warpEffectPlaying = true;
         warping = true;
-        Invoke("ComeOutOfWarp", Random.Range(5f, 10f));
+        Invoke("ComeOutOfWarp", Random.Range(LevelManager.main.MinWarpLength, LevelManager.main.MaxWarpLength));
     }
 
     public void ComeOutOfWarp() {
