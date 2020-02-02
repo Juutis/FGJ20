@@ -30,6 +30,8 @@ public class Projectile : MonoBehaviour
         this.lifeTime = options.LifeTime;
         rb2d.velocity = options.StartingVelocity;
         rb2d.AddForce(options.Direction * options.Speed, ForceMode2D.Impulse);
+        gameObject.tag = options.Tag;
+        gameObject.layer = LayerMask.NameToLayer(options.Layer);
     }
 
     void Update()
