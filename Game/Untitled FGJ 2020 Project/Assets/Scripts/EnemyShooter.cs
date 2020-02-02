@@ -6,7 +6,7 @@ public class EnemyShooter : MonoBehaviour
 {
     private GameObject player;
     [SerializeField]
-    private float shootDistance = 20f;
+    private float shootDistance = 12f;
     private Transform leftCannon;
     private Transform rightCannon;
 
@@ -16,10 +16,10 @@ public class EnemyShooter : MonoBehaviour
     void Start()
     {
         FindCannons();
-        config = (ShootingConfig)Resources.Load("Configs/ShootingConfig");
+        config = (ShootingConfig)Resources.Load("Configs/EnemyShootingConfig");
         if (config == null)
         {
-            Debug.LogWarning("Couldn't find Resources/Configs/ShootingConfig!");
+            Debug.LogWarning("Couldn't find Resources/Configs/EnemyShootingConfig!");
         }
         if (leftCannon == null || rightCannon == null)
         {
