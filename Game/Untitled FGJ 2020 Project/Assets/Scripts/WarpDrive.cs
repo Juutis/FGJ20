@@ -102,8 +102,7 @@ public class WarpDrive : MonoBehaviour
         ui.HideWarpText();
         effect.Warp();
         fuel--;
-        player.transform.position = motherShip.transform.position;
-        player.Disable();
+
         foreach (var part in motherShip.shipParts)
         {
             part.HideGhost();
