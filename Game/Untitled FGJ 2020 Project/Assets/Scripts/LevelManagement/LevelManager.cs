@@ -63,6 +63,9 @@ public class LevelManager : MonoBehaviour
             currentLevelObject.SetActive(true);
             player.position = new Vector3(playerPosition.position.x, playerPosition.position.y, player.position.z);
             playerPosition.gameObject.SetActive(false);
+            if (currentLevelIndex >= 2) {
+                WorldUI.main.ShowShootControls();
+            }
             currentLevelIndex += 1;
         } else {
             ui.Win();

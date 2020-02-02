@@ -43,7 +43,7 @@ public class WorldUI : MonoBehaviour
     }
 
     public void ShowShootControls() {
-        ShowInfo("Space to shoot.", playerTransform);
+        ShowInfo("Press space bar to shoot.", playerTransform);
         Invoke("HidePlayerInfo", 5f);
     }
 
