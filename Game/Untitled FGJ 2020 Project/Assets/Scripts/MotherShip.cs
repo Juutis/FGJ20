@@ -30,6 +30,9 @@ public class MotherShip : MonoBehaviour
         availableParts.AddRange(shipParts);
         health = healthPerModule;
         ui = GameObject.FindGameObjectWithTag("UI").GetComponent<UI>();
+
+        updateReadyToWarp();
+        updateLifeSupportStatus();
     }
 
     // Update is called once per frame
