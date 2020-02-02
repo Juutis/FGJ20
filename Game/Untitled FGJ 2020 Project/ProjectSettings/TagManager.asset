@@ -15,6 +15,7 @@ TagManager:
   - Waypoints
   - Enemy
   - EnemyProjectile
+  - FuelDropSpot
   layers:
   - Default
   - TransparentFX

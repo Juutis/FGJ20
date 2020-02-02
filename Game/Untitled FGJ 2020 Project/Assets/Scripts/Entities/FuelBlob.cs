@@ -23,7 +23,7 @@ public class FuelBlob : MonoBehaviour
     {
         circleCollider2d = GetComponent<CircleCollider2D>();
         rb2d = GetComponent<Rigidbody2D>();
-        fuelDropSpot = GameObject.FindGameObjectWithTag("FuelDropSpot").GetComponent<FuelDropSpot>();
+        fuelDropSpot = GameObject.FindWithTag("MotherShip").GetComponent<MotherShip>().FuelDropSpot;
     }
 
     void Update()

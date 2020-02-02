@@ -17,6 +17,10 @@ public class MotherShip : MonoBehaviour
         availableParts = new List<ShipPart>();
 
 
+    [SerializeField]
+    private FuelDropSpot dropSpot;
+    public FuelDropSpot FuelDropSpot { get { return dropSpot;}}
+
     UI ui;
 
     private float lifeSupportTimer = -1f;

@@ -25,8 +25,8 @@ public class WarpDrive : MonoBehaviour
         ui = GameObject.FindGameObjectWithTag("UI").GetComponent<UI>();
         player = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerMovement>();
         levelRoot = GameObject.FindGameObjectWithTag("Level");
-        fuelDropSpot = GameObject.FindGameObjectWithTag("FuelDropSpot").GetComponent<FuelDropSpot>();
-        ActivateFuelDropSpot(false);
+        fuelDropSpot = motherShip.FuelDropSpot;
+        DisableFuelDropSpot();
     }
 
     // Update is called once per frame
@@ -51,7 +51,7 @@ public class WarpDrive : MonoBehaviour
             ui.HideWarpText();
             ui.HideOutOfFuel();
             ui.HideWarpDamaged();
-            ActivateFuelDropSpot(false);
+            DisableFuelDropSpot();
             return false;
         }
         if (motherShip.IsReadyToWarp())
@@ -61,7 +61,7 @@ public class WarpDrive : MonoBehaviour
                 ui.ShowWarpText();
                 ui.HideOutOfFuel();
                 ui.HideWarpDamaged();
-                ActivateFuelDropSpot(false);
+                DisableFuelDropSpot();
                 return true;
             }
             else
@@ -83,7 +83,12 @@ public class WarpDrive : MonoBehaviour
     }
 
     public void GetFuel() {
+        Invoke("DisableFuelDropSpot", 0.5f);
         fuel = 1;
+    }
+
+    private void DisableFuelDropSpot() {
+        ActivateFuelDropSpot(false);
     }
 
     bool readyToWarp()
