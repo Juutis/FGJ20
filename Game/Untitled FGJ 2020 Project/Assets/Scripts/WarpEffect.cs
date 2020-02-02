@@ -35,6 +35,8 @@ public class WarpEffect : MonoBehaviour
 
     float origBgScaleX;
 
+    private PlayerMovement player;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -49,6 +51,8 @@ public class WarpEffect : MonoBehaviour
         origScaleX = motherShip.transform.localScale.x;
         origScaleY = motherShip.transform.localScale.y;
 
+        player = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerMovement>();
+
         foreach (var obj in GameObject.FindGameObjectsWithTag("WarpEffect"))
         {
             warpEffects.Add(obj.GetComponent<ParticleSystem>());
@@ -58,17 +62,6 @@ public class WarpEffect : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            if (warping)
-            {
-                UnWarp();
-            } else
-            {
-                Warp();
-            }
-        }
-
         if (warpTimer > Time.time)
         {
             if (warping)
@@ -137,21 +130,28 @@ public class WarpEffect : MonoBehaviour
     public void Warp()
     {
 
+        LevelManager.main.DisableLevel();
         foreach (var effect in warpEffects)
         {
             effect.Play();
         }
-
+        player.transform.position = motherShip.transform.position;
+        player.Disable();
         DualMusicPlayer.main.EnterWarp();
 
         warpTimer = Time.time + warpDurationStart;
         warpEffectPlaying = true;
         warping = true;
+        Invoke("ComeOutOfWarp", Random.Range(LevelManager.main.MinWarpLength, LevelManager.main.MaxWarpLength));
+    }
+
+    public void ComeOutOfWarp() {
+        UnWarp();
+        LevelManager.main.StartNextLevel();
     }
 
     public void UnWarp()
     {
-
         foreach (var effect in warpEffects)
         {
             effect.Stop();
@@ -160,5 +160,6 @@ public class WarpEffect : MonoBehaviour
         warpTimer = Time.time + warpDurationEnd;
         warpEffectPlaying = true;
         warping = false;
+        player.Activate();
     }
 }

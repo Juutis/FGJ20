@@ -42,11 +42,6 @@ public class MotherShip : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.T))
-        {
-            Hurt(5);
-        }
-
         if (lifeSupportTimer > 0)
         {
             ui.UpdateLifeSupportTimer(Mathf.Max(0.0f, lifeSupportTimer - Time.time) / lifeSupportTime);
@@ -78,6 +73,27 @@ public class MotherShip : MonoBehaviour
         return part;
     }
 
+    public ShipPart LaunchRandomPartToTarget(Vector3 target)
+    {
+        if (availableParts.Count <= 0)
+        {
+            return null;
+        }
+        ShipPart part = getRandomPart();
+        Vector3 dir = target - part.transform.position;
+        if (dir.magnitude < 0.01f)
+        {
+            dir = Vector2.down;
+        }
+        Vector3 force = dir.normalized * Random.Range(100f, 200f);
+        part.Launch(force, shipParts, target);
+        availableParts.Remove(part);
+
+        updateLifeSupportStatus();
+        updateReadyToWarp();
+        return part;
+    }
+
     private ShipPart getRandomPart()
     {
         int idx = Random.Range(0, availableParts.Count);
@@ -95,6 +111,14 @@ public class MotherShip : MonoBehaviour
         updateReadyToWarp();
     }
 
+    public void Wobble() {
+        foreach(ShipPart part in availableParts) {
+            if (part.IsDocked) {
+                part.Wobble();
+            }
+        }
+    }
+
     public void Hurt(float damage)
     {
 
@@ -104,11 +128,6 @@ public class MotherShip : MonoBehaviour
         {
             launchedPart = LaunchRandomPart();
             health = healthPerModule;
-        }
-        foreach(ShipPart part in shipParts) {
-            if (part != launchedPart && part.IsDocked) {
-                part.Wobble();
-            }
         }
     }
 
