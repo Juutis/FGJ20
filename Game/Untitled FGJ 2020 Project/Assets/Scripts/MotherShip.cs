@@ -48,11 +48,11 @@ public class MotherShip : MonoBehaviour
             ui.UpdateLifeSupportTimer(Mathf.Max(0.0f, lifeSupportTimer - Time.time) / lifeSupportTime);
         }
     }
-    public void LaunchRandomPart()
+    public ShipPart LaunchRandomPart()
     {
         if (availableParts.Count <= 0)
         {
-            return;
+            return null;
         }
         var part = getRandomPart();
         var dir = new Vector2(Random.Range(-10f, 10f), Random.Range(-10f, 10f));
@@ -66,6 +66,7 @@ public class MotherShip : MonoBehaviour
 
         updateLifeSupportStatus();
         updateReadyToWarp();
+        return part;
     }
 
     private ShipPart getRandomPart()
@@ -87,11 +88,18 @@ public class MotherShip : MonoBehaviour
 
     public void Hurt(float damage)
     {
+
+        ShipPart launchedPart = null;
         health -= damage;
         if (health <= 0)
         {
-            LaunchRandomPart();
+            launchedPart = LaunchRandomPart();
             health = healthPerModule;
+        }
+        foreach(ShipPart part in shipParts) {
+            if (part != launchedPart && part.IsDocked) {
+                part.Wobble();
+            }
         }
     }
 

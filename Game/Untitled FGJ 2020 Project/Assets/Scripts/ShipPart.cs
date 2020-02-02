@@ -47,6 +47,9 @@ public class ShipPart : MonoBehaviour
     public bool IsDockable { get { return isDockable; } set { isDockable = value; } }
 
     private Color ghostColor = new Color(0.75f, 0.9f, 1, 0.15f);
+    private Color launchedSecondaryColor = new Color(0.75f, 0.9f, 1, 1f);
+    private Color originalMainColor;
+    private Color originalSecondaryColor;
 
     public Vector3 OriginalPosition;
     public Quaternion OriginalRotation;
@@ -55,11 +58,24 @@ public class ShipPart : MonoBehaviour
 
     private ShipPart dockingTarget;
 
+    public bool IsDocked { get { return !launchStarted && !redocking && !launchFinished; } }
+
+    Animator animator;
+
+    private List<string> wobbles = new List<string>() {
+        "Wobble",
+        "WobbleX",
+        "WobbleY"
+    };
+
     void Start()
     {
+        animator = GetComponent<Animator>();
         OriginalPosition = transform.position;
         OriginalRotation = transform.rotation;
         spriteRenderer = GetComponent<SpriteRenderer>();
+        originalMainColor = spriteRenderer.sharedMaterial.GetColor("_MainColor");
+        originalSecondaryColor = spriteRenderer.sharedMaterial.GetColor("_SecondaryColor");
         CreateGhost();
         HideGhost();
         rb = GetComponent<Rigidbody2D>();
@@ -111,7 +127,7 @@ public class ShipPart : MonoBehaviour
                 )
                 {
                     dockingTarget = shipPart;
-                    Redock();
+                    StartRedocking();
                     break;
                 }
             }
@@ -143,7 +159,7 @@ public class ShipPart : MonoBehaviour
         }
     }
 
-    private void Redock()
+    private void StartRedocking()
     {
         dockingRotation = transform.rotation;
         dockingPosition = transform.position;
@@ -173,12 +189,25 @@ public class ShipPart : MonoBehaviour
         ghostSpriteRenderer.enabled = false;
     }
 
+    public void Wobble()
+    {
+        Invoke("DoWobbleAnimation", Random.Range(0f, 0.3f));
+    }
+
+    private void DoWobbleAnimation() {
+        animator.SetTrigger(wobbles[Random.Range(0, wobbles.Count)]);
+    }
+
     public void Launch(Vector2 force, List<ShipPart> shipParts)
     {
+        spriteRenderer.material.SetColor("_SecondaryColor", launchedSecondaryColor);
         this.shipParts = shipParts;
-        if (dockingTarget == null) {
+        if (dockingTarget == null)
+        {
             ShowGhost();
-        } else {
+        }
+        else
+        {
             dockingTarget.ShowGhost();
         }
         launchFinished = false;
@@ -189,10 +218,11 @@ public class ShipPart : MonoBehaviour
         collisionDisabledUntil = Time.time + 3.0f;
         coll.enabled = false;
         rb.simulated = true;
-        
+
     }
 
-    private void Repair() {
+    private void Repair()
+    {
         transform.position = dockingTarget.OriginalPosition;
         transform.rotation = dockingTarget.OriginalRotation;
         launchStarted = false;
@@ -202,5 +232,6 @@ public class ShipPart : MonoBehaviour
         dockingTarget.HideGhost();
         rb.simulated = false;
         ship.AttachPart(this);
+        spriteRenderer.material.SetColor("_SecondaryColor", originalSecondaryColor);
     }
 }
