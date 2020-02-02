@@ -32,10 +32,15 @@ public class FollowCamera : MonoBehaviour
         X,
         Y
     }
-    void Start()
+
+    private void Awake()
     {
         FindTarget();
         FindClampedArea();
+    }
+
+    void Start()
+    {
         if (target != null) {
             canFollow = true;
         } else {

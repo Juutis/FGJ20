@@ -22,7 +22,10 @@ public class PlayerMovement : MonoBehaviour {
     private PlayerMovementConfig config;
 
     private bool active = true;
+    private bool controllable = true;
     float horizontalAxis, verticalAxis;
+
+    private Bounds levelBounds;
 
     private enum ShipDirection
     {
@@ -38,6 +41,7 @@ public class PlayerMovement : MonoBehaviour {
         rb2d = GetComponent<Rigidbody2D>();
 
         FindThrusters();
+        levelBounds = Camera.main.GetComponent<FollowCamera>().GetBounds();
     }
 
     private void FindThrusters() {
@@ -56,12 +60,28 @@ public class PlayerMovement : MonoBehaviour {
         }
         return null;
     }
+
+    private void reInstateControls()
+    {
+        controllable = true;
+    }
     
     private void Update()
     {
+        if (outOfBounds())
+        {
+            controllable = false;
+            Invoke("reInstateControls", 2.0f);
+        }
+
+        if (!active)
+        {
+            controllable = false;
+        }
+
         horizontalAxis = Input.GetAxis("Horizontal");
         verticalAxis = Input.GetAxis("Vertical");
-        if (active)
+        if (controllable)
         {
             rb2d.drag = config.LinearDrag;
             rb2d.angularDrag = config.AngularDrag;
@@ -72,13 +92,24 @@ public class PlayerMovement : MonoBehaviour {
 
     private void FixedUpdate()
     {
+
         if (!active)
         {
             rb2d.velocity = Vector2.zero;
         }
         else
         {
-            HandleVerticalAxis(verticalAxis);
+            if (controllable)
+            {
+                HandleVerticalAxis(verticalAxis);
+            }
+            else
+            {
+                var targetDir = -transform.position.normalized;
+                rb2d.velocity = targetDir * config.VelocityMagnitudeMax * 0.5f;
+                var angle = Vector3.SignedAngle(sprite.transform.up, targetDir, Vector3.forward);
+                sprite.transform.Rotate(Vector3.forward, angle);
+            }
         }
     }
 
@@ -157,6 +188,14 @@ public class PlayerMovement : MonoBehaviour {
     public void Disable()
     {
         active = false;
+    }
+
+    public bool outOfBounds()
+    {
+        return transform.position.x > levelBounds.max.x ||
+            transform.position.y > levelBounds.max.y ||
+            transform.position.x < levelBounds.min.x ||
+            transform.position.y < levelBounds.min.y;
     }
 
 }
