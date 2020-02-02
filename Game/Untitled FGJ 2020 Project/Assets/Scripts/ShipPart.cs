@@ -38,6 +38,8 @@ public class ShipPart : MonoBehaviour
     private float redockPositionDuration = 0.5f;
     private Quaternion dockingRotation;
     private Vector3 dockingPosition;
+    private Vector3 launchTarget;
+    private bool targetSet = true;
 
     [SerializeField]
     private ShipPartType shipPartType;
@@ -102,6 +104,13 @@ public class ShipPart : MonoBehaviour
             bool tooFarUp = transform.position.y >= (bounds.max.y - yMinDistanceFromBounds);
             bool tooFarDown = transform.position.y <= (bounds.min.y + yMinDistanceFromBounds);
             if (tooFarToTheRight || tooFarToTheLeft || tooFarUp || tooFarDown)
+            {
+                rb.velocity = Vector2.zero;
+                launchFinished = true;
+                launchStarted = false;
+            }
+
+            if(targetSet && Vector3.Distance(transform.position, launchTarget) < 1f)
             {
                 rb.velocity = Vector2.zero;
                 launchFinished = true;
@@ -198,6 +207,13 @@ public class ShipPart : MonoBehaviour
         animator.SetTrigger(wobbles[Random.Range(0, wobbles.Count)]);
     }
 
+    public void Launch(Vector2 force, List<ShipPart> shipParts, Vector3 target)
+    {
+        targetSet = true;
+        launchTarget = target;
+        Launch(force, shipParts);
+    }
+
     public void Launch(Vector2 force, List<ShipPart> shipParts)
     {
         spriteRenderer.material.SetColor("_SecondaryColor", launchedSecondaryColor);
@@ -218,7 +234,7 @@ public class ShipPart : MonoBehaviour
         collisionDisabledUntil = Time.time + 3.0f;
         coll.enabled = false;
         rb.simulated = true;
-
+        targetSet = false;
     }
 
     private void Repair()
@@ -233,5 +249,6 @@ public class ShipPart : MonoBehaviour
         rb.simulated = false;
         ship.AttachPart(this);
         spriteRenderer.material.SetColor("_SecondaryColor", originalSecondaryColor);
+        targetSet = false;
     }
 }
