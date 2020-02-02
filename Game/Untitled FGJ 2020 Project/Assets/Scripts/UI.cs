@@ -20,6 +20,9 @@ public class UI : MonoBehaviour
     [SerializeField]
     GameObject lifeSupportDamaged;
 
+    [SerializeField]
+    GameObject outOfFuel;
+
     int lastTimeLeft = int.MaxValue;
 
     // Start is called before the first frame update
@@ -83,5 +86,15 @@ public class UI : MonoBehaviour
     public void HideLifeSupportDamaged()
     {
         lifeSupportDamaged.SetActive(false);
+    }
+
+    public void ShowOutOfFuel()
+    {
+        outOfFuel.SetActive(true);
+    }
+
+    public void HideOutOfFuel()
+    {
+        outOfFuel.SetActive(false);
     }
 }

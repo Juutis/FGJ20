@@ -22,7 +22,7 @@ public class WarpEffect : MonoBehaviour
     private Material bgMaterial;
     private Color origBgColorMain, origBgColorSecondary;
 
-    private bool warp = false;
+    public bool warping = false;
     private float warpTimer = 0;
     private bool warpEffectPlaying = false;
 
@@ -60,7 +60,7 @@ public class WarpEffect : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            if (warp)
+            if (warping)
             {
                 UnWarp();
             } else
@@ -71,7 +71,7 @@ public class WarpEffect : MonoBehaviour
 
         if (warpTimer > Time.time)
         {
-            if (warp)
+            if (warping)
             {
                 float lerp = 1.0f - (warpTimer - Time.time) / warpDurationStart;
                 bgMaterial.SetColor("_MainColor", Color.Lerp(origBgColorMain, warpColor, lerp));
@@ -98,7 +98,7 @@ public class WarpEffect : MonoBehaviour
         {
             if (warpEffectPlaying)
             {
-                if (warp)
+                if (warping)
                 {
                     bgMaterial.SetColor("_MainColor", warpColor);
                     bgMaterial.SetColor("_SecondaryColor", warpColor);
@@ -122,7 +122,7 @@ public class WarpEffect : MonoBehaviour
             }
         }
 
-        if (warp)
+        if (warping)
         {
             float scaleTime = Time.time - warpTimer + warpDurationStart;
             scaleX = origScaleX * (Mathf.Log10(scaleTime + 1) + 1);
@@ -146,7 +146,7 @@ public class WarpEffect : MonoBehaviour
 
         warpTimer = Time.time + warpDurationStart;
         warpEffectPlaying = true;
-        warp = true;
+        warping = true;
     }
 
     public void UnWarp()
@@ -159,6 +159,6 @@ public class WarpEffect : MonoBehaviour
         DualMusicPlayer.main.ExitWarp();
         warpTimer = Time.time + warpDurationEnd;
         warpEffectPlaying = true;
-        warp = false;
+        warping = false;
     }
 }

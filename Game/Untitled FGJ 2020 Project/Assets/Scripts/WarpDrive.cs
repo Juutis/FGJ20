@@ -28,17 +28,47 @@ public class WarpDrive : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (readyToWarp())
+        if (updateWarpStatus())
         {
-            ui.ShowWarpText();
             if (Input.GetKeyDown(KeyCode.Return))
             {
                 warp();
             }
         }
+    }
+
+    bool updateWarpStatus()
+    {
+        if (effect.warping)
+        {
+            ui.HideWarpText();
+            ui.HideOutOfFuel();
+            ui.HideWarpDamaged();
+            return false;
+        }
+        if (motherShip.IsReadyToWarp())
+        {
+            if (fuel > 0)
+            {
+                ui.ShowWarpText();
+                ui.HideOutOfFuel();
+                ui.HideWarpDamaged();
+                return true;
+            }
+            else
+            {
+                ui.HideWarpText();
+                ui.ShowOutOfFuel();
+                ui.HideWarpDamaged();
+                return false;
+            }
+        }
         else
         {
             ui.HideWarpText();
+            ui.HideOutOfFuel();
+            ui.ShowWarpDamaged();
+            return false;
         }
     }
 
