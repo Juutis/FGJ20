@@ -851,9 +851,8 @@ MonoBehaviour:
   laser: {fileID: 7648356054479256138}
   laserHitParticleSystem: {fileID: 7648356054378459134}
   cooldownTime: 5
-  state: 0
-  damageMin: 3
-  damageMax: 5
+  damageMin: 6
+  damageMax: 6
 --- !u!50 &3222582888323219087
 Rigidbody2D:
   serializedVersion: 4
@@ -932,7 +931,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9c869fab6652c564eac823f64c776960, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHP: 5
+  maxHP: 25
   destroyedParts: {fileID: 131637295904052092}
 --- !u!1 &7648356054378459133
 GameObject:

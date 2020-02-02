@@ -14,4 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   lifeTime: 5
   speed: 5
-  minInterval: 0.05
+  minInterval: 0.15
