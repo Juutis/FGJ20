@@ -6,7 +6,8 @@ public class LevelManager : MonoBehaviour
 {
     public static LevelManager main;
 
-    void Awake() {
+    void Awake()
+    {
         main = this;
     }
 
@@ -14,37 +15,45 @@ public class LevelManager : MonoBehaviour
     private float minWarpLength = 8f;
     [SerializeField]
     private float maxWarpLength = 15f;
-    public float MaxWarpLength {get {return maxWarpLength;}}
-    public float MinWarpLength {get {return minWarpLength;}}
+    public float MaxWarpLength { get { return maxWarpLength; } }
+    public float MinWarpLength { get { return minWarpLength; } }
 
     [SerializeField]
     private List<GameObject> levels = new List<GameObject>();
     [SerializeField]
-    private int currentLevelIndex =0;
+    private int currentLevelIndex = 0;
 
     private GameObject currentLevelObject;
-    
+
     private Transform player;
 
-    private void Start() {
+    private void Start()
+    {
         player = GameObject.FindGameObjectWithTag("Player").transform;
-        foreach(GameObject level in levels) {
+        foreach (GameObject level in levels)
+        {
             level.SetActive(false);
         }
         StartNextLevel();
     }
 
-    public void DisableLevel() {
-        if (currentLevelObject != null) {
+    public void DisableLevel()
+    {
+        if (currentLevelObject != null)
+        {
             currentLevelObject.SetActive(false);
         }
     }
-    public void StartNextLevel() {
-        if (currentLevelIndex < levels.Count) {
+    public void StartNextLevel()
+    {
+        if (currentLevelIndex < levels.Count)
+        {
             currentLevelObject = levels[currentLevelIndex];
             Transform playerPosition = null;
-            foreach(Transform child in currentLevelObject.transform) {
-                if (child.name == "PlayerPos") {
+            foreach (Transform child in currentLevelObject.transform)
+            {
+                if (child.name == "PlayerPos")
+                {
                     playerPosition = child;
                 }
             }
@@ -52,8 +61,23 @@ public class LevelManager : MonoBehaviour
             player.position = new Vector3(playerPosition.position.x, playerPosition.position.y, player.position.z);
             playerPosition.gameObject.SetActive(false);
             currentLevelIndex += 1;
-        } else {
+        }
+        else
+        {
             Debug.Log("The end!");
         }
+    }
+
+    public void ResetPlayerPosition()
+    {
+        Transform playerPosition = null;
+        foreach (Transform child in currentLevelObject.transform)
+        {
+            if (child.name == "PlayerPos")
+            {
+                playerPosition = child;
+            }
+        }
+        player.position = new Vector3(playerPosition.position.x, playerPosition.position.y, player.position.z);
     }
 }

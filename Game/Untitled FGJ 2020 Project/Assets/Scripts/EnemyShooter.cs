@@ -64,7 +64,6 @@ public class EnemyShooter : MonoBehaviour
 
         if(Vector3.Distance(player.transform.position, transform.position) < shootDistance)
         {
-            Debug.Log("shoot");
             float angleDiff = Vector3.SignedAngle(transform.up, player.transform.position - transform.position, Vector3.forward);
             float rotateDir = angleDiff < 0 ? -1 : angleDiff > 0 ? 1 : 0;
             /*ActivateLeftNavigationThruster(false);
@@ -109,7 +108,7 @@ public class EnemyShooter : MonoBehaviour
             LifeTime = config.LifeTime,
             Speed = config.Speed,
             Direction = rightCannon.up,
-            StartingVelocity = Vector2.zero,//rb2d.velocity,
+            StartingVelocity = vec,//rb2d.velocity,
             Position = rightCannon.position,
             Rotation = rightCannon.rotation,
             Tag = "EnemyProjectile",

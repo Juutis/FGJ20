@@ -36,6 +36,7 @@ public class DestroyableEnemy : MonoBehaviour
         if (collision.transform.tag == "PlayerProjectile")
         {
             currentHP--;
+            Debug.Log("shoot");
         }
     }
 }

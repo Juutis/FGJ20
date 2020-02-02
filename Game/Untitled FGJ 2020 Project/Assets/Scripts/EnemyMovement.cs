@@ -92,7 +92,6 @@ public class EnemyMovement : MonoBehaviour
         Vector3 currentWaypoint = waypoints[currentWaypointIndex];
         Vector3 nextWaypoint = waypoints[nextWaypointIndex];
         float distToCurrent = Vector3.Distance(transform.position, currentWaypoint);
-        Debug.Log(distToCurrent + ", \t" + currentWaypoint);
 
         if (distToCurrent < 0.5f)
         {

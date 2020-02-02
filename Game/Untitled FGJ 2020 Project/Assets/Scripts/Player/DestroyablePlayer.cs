@@ -33,7 +33,7 @@ public class DestroyablePlayer : MonoBehaviour
             }*/
             if(player != null)
             {
-                player.transform.position = motherShip.transform.position;
+                LevelManager.main.ResetPlayerPosition();
                 player.Disable();
                 Invoke("Activate", 1f);
             }
@@ -42,7 +42,6 @@ public class DestroyablePlayer : MonoBehaviour
 
     private void Activate()
     {
-        Debug.Log("prööt");
         player.Activate();
         currentHP = maxHP;
     }
