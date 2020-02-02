@@ -1003,6 +1003,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1121791856259489584, guid: ce4331d5cfac0e140a3e0d8903b4ed5b,
+        type: 3}
+      propertyPath: muted
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2043853865881406453, guid: ce4331d5cfac0e140a3e0d8903b4ed5b,
         type: 3}
       propertyPath: m_FontData.m_FontSize
