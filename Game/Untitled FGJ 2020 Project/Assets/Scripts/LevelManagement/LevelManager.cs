@@ -90,6 +90,9 @@ public class LevelManager : MonoBehaviour
 
     public Color levelColor()
     {
-        return colors[currentLevelIndex];
+        if (currentLevelIndex < colors.Count) {
+            return colors[currentLevelIndex];
+        }
+        return Color.white;
     }
 }

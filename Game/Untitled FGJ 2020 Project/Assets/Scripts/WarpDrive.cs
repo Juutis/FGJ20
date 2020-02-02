@@ -111,6 +111,8 @@ public class WarpDrive : MonoBehaviour
                 part.gameObject.SetActive(false);
             }
         }
-        levelRoot.SetActive(false);
+        if (levelRoot != null) {
+            levelRoot.SetActive(false);
+        }
     }
 }
