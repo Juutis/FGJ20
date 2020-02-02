@@ -12,6 +12,8 @@ TagManager:
   - UI
   - WarpDrive
   - Level
+  - Waypoints
+  - Enemy
   layers:
   - Default
   - TransparentFX
