@@ -14,6 +14,8 @@ public class WarpDrive : MonoBehaviour
 
     GameObject levelRoot;
 
+    private FuelDropSpot fuelDropSpot;
+
 
     // Start is called before the first frame update
     void Start()
@@ -23,6 +25,8 @@ public class WarpDrive : MonoBehaviour
         ui = GameObject.FindGameObjectWithTag("UI").GetComponent<UI>();
         player = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerMovement>();
         levelRoot = GameObject.FindGameObjectWithTag("Level");
+        fuelDropSpot = GameObject.FindGameObjectWithTag("FuelDropSpot").GetComponent<FuelDropSpot>();
+        ActivateFuelDropSpot(false);
     }
 
     // Update is called once per frame
@@ -37,6 +41,9 @@ public class WarpDrive : MonoBehaviour
         }
     }
 
+    private void ActivateFuelDropSpot(bool active) {
+        fuelDropSpot.gameObject.SetActive(active);
+    }
     bool updateWarpStatus()
     {
         if (effect.warping)
@@ -44,6 +51,7 @@ public class WarpDrive : MonoBehaviour
             ui.HideWarpText();
             ui.HideOutOfFuel();
             ui.HideWarpDamaged();
+            ActivateFuelDropSpot(false);
             return false;
         }
         if (motherShip.IsReadyToWarp())
@@ -53,6 +61,7 @@ public class WarpDrive : MonoBehaviour
                 ui.ShowWarpText();
                 ui.HideOutOfFuel();
                 ui.HideWarpDamaged();
+                ActivateFuelDropSpot(false);
                 return true;
             }
             else
@@ -60,6 +69,7 @@ public class WarpDrive : MonoBehaviour
                 ui.HideWarpText();
                 ui.ShowOutOfFuel();
                 ui.HideWarpDamaged();
+                ActivateFuelDropSpot(true);
                 return false;
             }
         }
@@ -70,6 +80,10 @@ public class WarpDrive : MonoBehaviour
             ui.ShowWarpDamaged();
             return false;
         }
+    }
+
+    public void GetFuel() {
+        fuel = 1;
     }
 
     bool readyToWarp()
