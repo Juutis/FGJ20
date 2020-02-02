@@ -30,11 +30,9 @@ public class Cannon : MonoBehaviour
     private MotherShip motherShip;
     Vector3 startPos;
     private CannonStates state = CannonStates.Cooling;
-
-    [SerializeField]
-    private float damageMin = 3.0f;
-    [SerializeField]
-    private float damageMax = 5.0f;
+    
+    private float damageMin = 6.0f;
+    private float damageMax = 6.0f;
 
     void Start()
     {
