@@ -42,7 +42,7 @@ public class MotherShip : MonoBehaviour
 
         if (lifeSupportTimer > 0)
         {
-            ui.UpdateLifeSupportTimer(Mathf.Max(0.0f, lifeSupportTimer - Time.time));
+            ui.UpdateLifeSupportTimer(Mathf.Max(0.0f, lifeSupportTimer - Time.time) / lifeSupportTime);
         }
     }
     public void LaunchRandomPart()
@@ -61,16 +61,7 @@ public class MotherShip : MonoBehaviour
         part.Launch(force, shipParts);
         availableParts.Remove(part);
 
-        if (countLifeSupports() <= 0)
-        {
-            ui.ShowLifeSupportWarning();
-            if (lifeSupportTimer < 0.0f)
-            {
-                lifeSupportTimer = Time.time + lifeSupportTime;
-            }
-            ui.UpdateLifeSupportTimer(Mathf.Max(0.0f, lifeSupportTimer - Time.time));
-        }
-
+        updateLifeSupportStatus();
         updateReadyToWarp();
     }
 
@@ -86,13 +77,8 @@ public class MotherShip : MonoBehaviour
         {
             availableParts.Add(part);
         }
-
-        if (countLifeSupports() > 0)
-        {
-            ui.HideLifeSupportWarning();
-            lifeSupportTimer = -1.0f;
-        }
-
+        
+        updateLifeSupportStatus();
         updateReadyToWarp();
     }
 
@@ -135,10 +121,46 @@ public class MotherShip : MonoBehaviour
     private void updateReadyToWarp()
     {
         readyToWarp = countEngines() == 2;
+        if (!readyToWarp)
+        {
+            ui.ShowWarpDamaged();
+        }
+        else
+        {
+            ui.HideWarpDamaged();
+        }
     }
 
     public bool IsReadyToWarp()
     {
         return readyToWarp;
+    }
+
+    private void updateLifeSupportStatus()
+    {
+        int lifeSupports = countLifeSupports();
+
+        if (lifeSupports == 0)
+        {
+            ui.ShowLifeSupportWarning();
+            ui.HideLifeSupportDamaged();
+            if (lifeSupportTimer < 0.0f)
+            {
+                lifeSupportTimer = Time.time + lifeSupportTime;
+            }
+            ui.UpdateLifeSupportTimer(Mathf.Max(0.0f, lifeSupportTimer - Time.time) / lifeSupportTime);
+        } 
+        else if (lifeSupports < 3)
+        {
+            lifeSupportTimer = -1.0f;
+            ui.HideLifeSupportWarning();
+            ui.ShowLifeSupportDamaged();
+        }
+        else
+        {
+            lifeSupportTimer = -1.0f;
+            ui.HideLifeSupportWarning();
+            ui.HideLifeSupportDamaged();
+        }
     }
 }
