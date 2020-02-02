@@ -113,6 +113,7 @@ MonoBehaviour:
   warpColor: {r: 0.9150943, g: 0.6637539, b: 0, a: 1}
   warpDurationStart: 0.1
   warpDurationEnd: 0.3
+  warping: 0
 --- !u!114 &922587545424186690
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -125,7 +126,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 53ed994b7ff5efd40af3d4ca681e23b1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fuel: 1
+  fuel: 0
 --- !u!1 &5790898156877201834
 GameObject:
   m_ObjectHideFlags: 0

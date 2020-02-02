@@ -68,6 +68,8 @@ Material:
     - _OcclusionStrength: 1
     - _Parallax: 0.02
     - _Scale: 100
+    - _ScaleX: 10
+    - _ScaleY: 5
     - _ScrollSpeed: 0.5
     - _ScrollSpeedX: 0
     - _ScrollSpeedY: -0.25

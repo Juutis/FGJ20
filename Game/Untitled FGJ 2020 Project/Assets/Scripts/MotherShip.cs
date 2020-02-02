@@ -50,6 +50,11 @@ public class MotherShip : MonoBehaviour
         if (lifeSupportTimer > 0)
         {
             ui.UpdateLifeSupportTimer(Mathf.Max(0.0f, lifeSupportTimer - Time.time) / lifeSupportTime);
+
+            if (lifeSupportTimer < Time.time)
+            {
+                ui.YouDied();
+            }
         }
     }
     public ShipPart LaunchRandomPart()
@@ -107,7 +112,7 @@ public class MotherShip : MonoBehaviour
         }
     }
 
-    private int countLifeSupports()
+    public int countLifeSupports()
     {
         int result = 0;
         foreach (var part in availableParts)
@@ -120,7 +125,7 @@ public class MotherShip : MonoBehaviour
         return result;
     }
 
-    private int countEngines()
+    public int countEngines()
     {
         int result = 0;
         foreach (var part in availableParts)
