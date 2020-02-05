@@ -107,7 +107,7 @@ public class TractorBeam : MonoBehaviour
         backgroundBeamSr.size = new Vector2(backgroundBeamSr.size.x, currentLength * 2);
     }
 
-    void Update()
+    private void FixedUpdate()
     {
         if (isActive)
         {
