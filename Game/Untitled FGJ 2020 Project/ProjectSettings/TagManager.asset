@@ -16,6 +16,7 @@ TagManager:
   - Enemy
   - EnemyProjectile
   - FuelDropSpot
+  - FadeManager
   layers:
   - Default
   - TransparentFX

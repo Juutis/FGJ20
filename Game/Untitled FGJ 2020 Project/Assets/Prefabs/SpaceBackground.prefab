@@ -113,6 +113,7 @@ MonoBehaviour:
   warpColor: {r: 0.9150943, g: 0.6637539, b: 0, a: 1}
   warpDurationStart: 0.1
   warpDurationEnd: 0.3
+  warpDurationEndIntro: 3
   warping: 0
 --- !u!114 &922587545424186690
 MonoBehaviour:

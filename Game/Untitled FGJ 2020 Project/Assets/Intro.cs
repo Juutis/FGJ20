@@ -7,17 +7,25 @@ public class Intro : MonoBehaviour
 {
 
     // Start is called before the first frame update
+    private bool isEnteringGame = false;
     void Start()
     {
-        
+        MusicPlayer.main.PlayIntroMusic();
+        FullscreenFade.main.Intro();
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Return))
+        if (!isEnteringGame && Input.GetKeyDown(KeyCode.Return))
         {
-            SceneManager.LoadScene("main");
+            isEnteringGame = true;
+            FullscreenFade.main.FadeIn(FadeInComplete);
         }
+    }
+
+    private void FadeInComplete() {
+        MusicPlayer.main.PlayGameMusic();
+        SceneManager.LoadScene("main");
     }
 }

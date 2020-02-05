@@ -18,6 +18,11 @@ public class WarpEffect : MonoBehaviour
     float warpDurationStart = 1.0f;
     [SerializeField]
     float warpDurationEnd = 1.0f;
+    [SerializeField]
+    float warpDurationEndIntro = 1.0f;
+
+
+    private float currentWarpEndDuration;
 
     private Material bgMaterial;
     private Color origBgColorMain, origBgColorSecondary;
@@ -52,11 +57,16 @@ public class WarpEffect : MonoBehaviour
         origScaleY = motherShip.transform.localScale.y;
 
         player = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerMovement>();
-
         foreach (var obj in GameObject.FindGameObjectsWithTag("WarpEffect"))
         {
             warpEffects.Add(obj.GetComponent<ParticleSystem>());
         }
+        currentWarpEndDuration = warpDurationEndIntro;
+        UnWarp(true);
+        FullscreenFade.main.FadeOut(AfterFadeOut);
+    }
+
+    public void AfterFadeOut() {
     }
 
     // Update is called once per frame
@@ -75,7 +85,7 @@ public class WarpEffect : MonoBehaviour
                 }
             } else
             {
-                float lerp = 1.0f - (warpTimer - Time.time) / warpDurationEnd;
+                float lerp = 1.0f - (warpTimer - Time.time) / currentWarpEndDuration;
                 bgMaterial.SetColor("_MainColor", Color.Lerp(warpColor, origBgColorMain, lerp));
                 bgMaterial.SetColor("_SecondaryColor", Color.Lerp(warpColor, origBgColorSecondary, lerp));
 
@@ -112,6 +122,7 @@ public class WarpEffect : MonoBehaviour
                     }
                 }
                 warpEffectPlaying = false;
+                currentWarpEndDuration = warpDurationEnd;
             }
         }
 
@@ -138,7 +149,7 @@ public class WarpEffect : MonoBehaviour
         }
         player.transform.position = motherShip.transform.position;
         player.Disable();
-        DualMusicPlayer.main.EnterWarp();
+        MusicPlayer.main.EnterWarp();
 
         warpTimer = Time.time + warpDurationStart;
         warpEffectPlaying = true;
@@ -148,19 +159,19 @@ public class WarpEffect : MonoBehaviour
 
     public void ComeOutOfWarp() {
         origBgColorMain = LevelManager.main.levelColor();
-        UnWarp();
+        UnWarp(false);
         LevelManager.main.StartNextLevel();
     }
 
-    public void UnWarp()
+    public void UnWarp(bool isIntro)
     {
         motherShip.GetComponent<MotherShip>().HyperSpaceEnd.Play();
         foreach (var effect in warpEffects)
         {
             effect.Stop();
         }
-        DualMusicPlayer.main.ExitWarp();
-        warpTimer = Time.time + warpDurationEnd;
+        MusicPlayer.main.ExitWarp(isIntro);
+        warpTimer = Time.time + currentWarpEndDuration;
         warpEffectPlaying = true;
         warping = false;
         player.Activate();
