@@ -17,7 +17,6 @@ public class WarpDrive : MonoBehaviour
     private FuelDropSpot fuelDropSpot;
 
 
-    // Start is called before the first frame update
     void Start()
     {
         effect = GetComponent<WarpEffect>();
@@ -29,22 +28,22 @@ public class WarpDrive : MonoBehaviour
         DisableFuelDropSpot();
     }
 
-    // Update is called once per frame
     void Update()
     {
-        if (updateWarpStatus())
+        if (UpdateWarpStatus())
         {
             if (Input.GetKeyDown(KeyCode.Return))
             {
-                warp();
+                Warp();
             }
         }
     }
 
-    private void ActivateFuelDropSpot(bool active) {
+    private void ActivateFuelDropSpot(bool active)
+    {
         fuelDropSpot.gameObject.SetActive(active);
     }
-    bool updateWarpStatus()
+    private bool UpdateWarpStatus()
     {
         if (effect.warping)
         {
@@ -82,37 +81,41 @@ public class WarpDrive : MonoBehaviour
         }
     }
 
-    public void GetFuel() {
+    public void GetFuel()
+    {
         Invoke("DisableFuelDropSpot", 0.5f);
         fuel = 1;
     }
 
-    private void DisableFuelDropSpot() {
+    private void DisableFuelDropSpot()
+    {
         ActivateFuelDropSpot(false);
     }
 
-    bool readyToWarp()
+    private bool ReadyToWarp()
     {
         return motherShip.IsReadyToWarp() && fuel > 0;
     }
 
-    void warp()
+    private void Warp()
     {
 
         ui.HideWarpText();
         effect.Warp();
         fuel--;
 
-        foreach (var part in motherShip.shipParts)
+        foreach (var part in motherShip.ShipParts)
         {
             part.HideGhost();
-            if (!motherShip.availableParts.Contains(part))
+            if (!motherShip.AvailableParts.Contains(part))
             {
                 part.gameObject.SetActive(false);
             }
         }
-        if (levelRoot != null) {
+        if (levelRoot != null)
+        {
             levelRoot.SetActive(false);
         }
     }
+
 }

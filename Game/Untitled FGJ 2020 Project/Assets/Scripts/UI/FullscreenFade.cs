@@ -111,7 +111,7 @@ public class FullscreenFade : MonoBehaviour
     void Update()
     {
         if (isFading) {
-            fadingTimer += Time.unscaledDeltaTime / fadingDuration;
+            fadingTimer += Time.deltaTime / fadingDuration;
             imgFade.color =  Color.Lerp(originalColor, targetColor, fadingTimer);
             if (fadeMusic) {
                 musicPlayer.SetVolume(Mathf.Lerp(originalMusicVolume, targetMusicVolume, fadingTimer));

@@ -36,9 +36,9 @@ public class WarpEffect : MonoBehaviour
     private float scaleX = 1.0f;
     private float scaleY = 1.0f;
 
-    GameObject motherShip;
+    private MotherShip motherShip;
 
-    float origBgScaleX;
+    private float origBgScaleX;
 
     private PlayerMovement player;
 
@@ -50,7 +50,7 @@ public class WarpEffect : MonoBehaviour
         origBgColorSecondary = bgMaterial.GetColor("_SecondaryColor");
         origBgScaleX = bgMaterial.GetFloat("_ScaleX");
 
-        motherShip = GameObject.FindGameObjectWithTag("MotherShip");
+        motherShip = GameObject.FindGameObjectWithTag("MotherShip").GetComponent<MotherShip>();
         objects = motherShip.GetComponentsInChildren<SpriteRenderer>();
 
         origScaleX = motherShip.transform.localScale.x;
@@ -157,15 +157,15 @@ public class WarpEffect : MonoBehaviour
         Invoke("ComeOutOfWarp", Random.Range(LevelManager.main.MinWarpLength, LevelManager.main.MaxWarpLength));
     }
 
-    public void ComeOutOfWarp() {
+    private void ComeOutOfWarp() {
         origBgColorMain = LevelManager.main.levelColor();
         UnWarp(false);
         LevelManager.main.StartNextLevel();
     }
 
-    public void UnWarp(bool isIntro)
+    private void UnWarp(bool isIntro)
     {
-        motherShip.GetComponent<MotherShip>().HyperSpaceEnd.Play();
+        motherShip.HyperSpaceEnd.Play();
         foreach (var effect in warpEffects)
         {
             effect.Stop();
@@ -175,5 +175,15 @@ public class WarpEffect : MonoBehaviour
         warpEffectPlaying = true;
         warping = false;
         player.Activate();
+        ReEnableGhostParts();
+    }
+    
+    private void ReEnableGhostParts() {
+        foreach (var part in motherShip.ShipParts)
+        {
+            if (!part.IsDocked) {
+                part.ShowGhost();
+            }
+        }
     }
 }

@@ -196,7 +196,7 @@ public class UI : MonoBehaviour
 
     public void Win()
     {
-        switch(motherShip.countLifeSupports())
+        switch(motherShip.CountLifeSupports())
         {
             case 3:
                 HappyEnding();

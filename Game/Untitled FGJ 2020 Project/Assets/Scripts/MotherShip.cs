@@ -6,36 +6,37 @@ using UnityEngine;
 public class MotherShip : MonoBehaviour
 {
     [SerializeField]
-    float healthPerModule = 10f;
+    private float healthPerModule = 10f;
 
     [SerializeField]
-    float lifeSupportTime = 60f;
+    private float lifeSupportTime = 60f;
 
-    float health;
+    private float health;
 
-    public List<ShipPart> shipParts = new List<ShipPart>(),
-        availableParts = new List<ShipPart>();
+    private List<ShipPart> shipParts = new List<ShipPart>();
+    private List<ShipPart> availableParts = new List<ShipPart>();
 
+    public List<ShipPart> ShipParts { get { return shipParts; } }
+    public List<ShipPart> AvailableParts { get { return availableParts; } }
 
     [SerializeField]
     private FuelDropSpot dropSpot;
-    public FuelDropSpot FuelDropSpot { get { return dropSpot;}}
+    public FuelDropSpot FuelDropSpot { get { return dropSpot; } }
 
     [SerializeField]
     private AudioSource hyperSpaceStart;
     [SerializeField]
     private AudioSource hyperSpaceEnd;
 
-    public AudioSource HyperSpaceStart {get {return hyperSpaceStart;}}
-    public AudioSource HyperSpaceEnd {get {return hyperSpaceEnd;}}
+    public AudioSource HyperSpaceStart { get { return hyperSpaceStart; } }
+    public AudioSource HyperSpaceEnd { get { return hyperSpaceEnd; } }
 
-    UI ui;
+    private UI ui;
 
     private float lifeSupportTimer = -1f;
 
-    bool readyToWarp = false;
+    private bool readyToWarp = false;
 
-    // Start is called before the first frame update
     void Start()
     {
         shipParts.AddRange(GetComponentsInChildren<ShipPart>());
@@ -43,11 +44,10 @@ public class MotherShip : MonoBehaviour
         health = healthPerModule;
         ui = GameObject.FindGameObjectWithTag("UI").GetComponent<UI>();
 
-        updateReadyToWarp();
-        updateLifeSupportStatus();
+        UpdateReadyToWarp();
+        UpdateLifeSupportStatus();
     }
 
-    // Update is called once per frame
     void Update()
     {
         if (lifeSupportTimer > 0)
@@ -66,7 +66,7 @@ public class MotherShip : MonoBehaviour
         {
             return null;
         }
-        var part = getRandomPart();
+        var part = GetRandomPart();
         var dir = new Vector2(Random.Range(-10f, 10f), Random.Range(-10f, 10f));
         if (dir.magnitude < 0.01f)
         {
@@ -76,8 +76,8 @@ public class MotherShip : MonoBehaviour
         part.Launch(force, shipParts);
         availableParts.Remove(part);
 
-        updateLifeSupportStatus();
-        updateReadyToWarp();
+        UpdateLifeSupportStatus();
+        UpdateReadyToWarp();
         return part;
     }
 
@@ -87,7 +87,7 @@ public class MotherShip : MonoBehaviour
         {
             return null;
         }
-        ShipPart part = getRandomPart();
+        ShipPart part = GetRandomPart();
         Vector3 dir = target - part.transform.position;
         if (dir.magnitude < 0.01f)
         {
@@ -98,12 +98,12 @@ public class MotherShip : MonoBehaviour
         part.Launch(force, shipParts, target);
         availableParts.Remove(part);
 
-        updateLifeSupportStatus();
-        updateReadyToWarp();
+        UpdateLifeSupportStatus();
+        UpdateReadyToWarp();
         return part;
     }
 
-    private ShipPart getRandomPart()
+    private ShipPart GetRandomPart()
     {
         int idx = Random.Range(0, availableParts.Count);
         return availableParts[idx];
@@ -115,14 +115,17 @@ public class MotherShip : MonoBehaviour
         {
             availableParts.Add(part);
         }
-        
-        updateLifeSupportStatus();
-        updateReadyToWarp();
+
+        UpdateLifeSupportStatus();
+        UpdateReadyToWarp();
     }
 
-    public void Wobble() {
-        foreach(ShipPart part in availableParts) {
-            if (part.IsDocked) {
+    public void Wobble()
+    {
+        foreach (ShipPart part in availableParts)
+        {
+            if (part.IsDocked)
+            {
                 part.Wobble();
             }
         }
@@ -140,7 +143,7 @@ public class MotherShip : MonoBehaviour
         }
     }
 
-    public int countLifeSupports()
+    public int CountLifeSupports()
     {
         int result = 0;
         foreach (var part in availableParts)
@@ -153,7 +156,7 @@ public class MotherShip : MonoBehaviour
         return result;
     }
 
-    public int countEngines()
+    public int CountEngines()
     {
         int result = 0;
         foreach (var part in availableParts)
@@ -166,9 +169,9 @@ public class MotherShip : MonoBehaviour
         return result;
     }
 
-    private void updateReadyToWarp()
+    private void UpdateReadyToWarp()
     {
-        readyToWarp = countEngines() == 2;
+        readyToWarp = CountEngines() == 2;
         if (!readyToWarp)
         {
             ui.ShowWarpDamaged();
@@ -184,9 +187,9 @@ public class MotherShip : MonoBehaviour
         return readyToWarp;
     }
 
-    private void updateLifeSupportStatus()
+    private void UpdateLifeSupportStatus()
     {
-        int lifeSupports = countLifeSupports();
+        int lifeSupports = CountLifeSupports();
 
         if (lifeSupports == 0)
         {
@@ -197,7 +200,7 @@ public class MotherShip : MonoBehaviour
                 lifeSupportTimer = Time.time + lifeSupportTime;
             }
             ui.UpdateLifeSupportTimer(Mathf.Max(0.0f, lifeSupportTimer - Time.time) / lifeSupportTime);
-        } 
+        }
         else if (lifeSupports < 3)
         {
             lifeSupportTimer = -1.0f;
